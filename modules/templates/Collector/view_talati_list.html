@@ -1,0 +1,264 @@
+{% extends "Collector_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Complaint
+{% endblock %}
+
+{% block content %}
+
+        <style>
+            body {
+                background-color: midnightblue;
+            }
+            .main-container {
+                background-color: white;
+                font-family: 'Muli';
+                height: fit-content;
+                border-radius: 17px;
+                box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
+                padding-bottom: 10px;
+            }
+            .background-cover2{
+                background-color: rgba(25,25,112, 0.1);
+                position: relative;
+                margin: 0px;
+                height: 200px;
+                /* z-index: -1; */
+                padding-top: 2%;
+                border-radius: 17px 17px 0px 0px;
+                overflow: hidden;
+                /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+            }
+            .circle1{
+                position: absolute;
+                right: -5%;
+                top: -10%;
+                width: 230px;
+                height: 230px;
+                /* filter: blur(10px); */
+                background-color: rgba(74, 3, 255, 0.2);
+                border-bottom-left-radius:  100%;
+                /* border-top-left-radius:  100%; */
+                overflow: hidden;
+                /* z-index: -1; */
+            }
+            .circle2{
+                position: absolute;
+                right: -5%;
+                top: 12%;
+                width: 230px;
+                height: 230px;
+                /* filter: blur(60px); */
+                background-color: rgba(74, 3, 255, 0.2);
+                border-top-left-radius:  100%;
+                overflow: hidden;
+            }
+            .container{
+                padding: 50px;
+            }
+            .form-head{
+                display: inline-block;
+                font-size: 2.7vh;
+                width: 17%;
+                padding: 10px 4px;
+                font-family: sans-serif;
+                color: midnightblue;
+                border-left: 5px solid midnightblue;
+                margin-top: 1.5%;
+                background-color: rgba(0, 0, 0, 0.04);
+            }
+            .complaint-data{
+                font-size: 2.6vh;
+                padding: 10px 20px;
+            }
+            .view-btn{
+                text-decoration: none;
+                padding: 10px 12px;
+                color: white;
+                background-color: midnightblue;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+                font-size: 18px;
+            }
+            .responsive-container{
+                display: flex;
+            }
+            .responsive-container > *{
+                flex: 0 0 auto;
+            }
+            .responsive .form-head{
+                width: 150px;
+            }
+            .responsive-container .complaint-data{
+                width: 80%;
+                margin-top: 12px;
+            }
+            .profile_image{
+                width: 150px;
+                height: 150px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 100%;
+            }
+            .edit_button{
+                text-decoration: none;
+                padding: 17px 20px;
+                color: black;
+                background-color: gold;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+                position: absolute;
+                right: 15;
+            }
+            input{
+                height: 45px;
+                width: 40%;
+                border-radius: 7px;
+                outline: none;
+                border: 1px solid rgba(0,0,0,0.2);
+                padding: 0 9px;
+                font-size: 17px;
+            }
+            .select-section{
+                border: 1px solid rgba(0,0,0,0.2);
+                padding: 10px 20px;
+                background-color: white;
+                outline: none;
+                border-radius: 7px;
+                width: 40%;
+                font-size: 17px;
+            }
+            h1{
+                font-size: 30px;
+            }
+            section .recent-document-table{
+                background-color: white;
+                color: black;
+                border: 1px solid rgb(0,0,0,0.1);
+                border-radius: 10px;
+                margin: 40px 20px 40px 30px;
+                box-shadow: 0 0 10px rgb(0,0,0,0.1);
+            }
+            table{
+                border-collapse: collapse;
+                width: 100%;
+                /* border: 1px solid black; */
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            section .recent-document-table tr:not(:last-child){
+                border-bottom: 1px solid black;
+            }
+            table tr td,th{
+                padding: 20px;
+                text-align: center;
+            }
+            table tr:first-of-type{
+                background-color: gold;
+            }
+            .pagination {
+                display: flex;
+                margin-top: 15px;
+                margin-left: 25px;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 25px;
+            }
+            .pagination a {
+                text-decoration: none;
+            }
+
+            .pagination-number {
+                padding: 12px 17px;
+                border-radius: 2px;
+                color: #fff;
+                background-color: midnightblue;
+            }
+
+            .pagination-number:hover,
+            .pagination-current {
+                background-color: midnightblue;
+            }
+
+            .pagination-action {
+                margin: 0 2px;
+                color: #fff;    
+                font-size: 1em;
+                align-items: center;
+                padding: 10px 10px;
+                border-radius: 5px;
+                color: midnightblue;
+                background-color: #ffffff;
+                border: 1px solid midnightblue;
+            }
+
+            .pagination-action:hover,
+            .pagination-previous,
+            .pagination-next {
+                color: midnightblue;
+            }
+        </style>
+        <div class="main-container">
+            <div class="background-cover2" >
+                <div class="circle2"></div>
+                <div class="circle1"></div>
+                <h1 style="color: midnightblue;text-align: center;margin-top: 3.5%;margin-left:2%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Current Talati List </h1>
+                <h2 style="color: midnightblue;text-align: center;margin-top: 3.5%;margin-left:2%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Get Talati Inforamtation for decison references</h2>
+            </div>
+            <div id="main">
+              <section>
+                <div class="recent-document-table">
+                  <table>
+                    <tr>
+                      <th>Sr No.</th>  
+                      <th>Fullname</th>
+                      <th>Gender</th>
+                      <th>Address</th>
+                      <th>Last Login Date</th>
+                      <th>Last Login Time</th>
+                    </tr>
+                    {% for talati in page_obj %}
+                    <tr>
+                      <td style="width: 10%;">{{ forloop.counter }}.</td>
+                      <td style="width: 30%;">{{ talati.user.first_name }} {{ talati.user.last_name }}</td>
+                      <td style="width: 10%;">{{ talati.gender }}</td>
+                      <td>{{ talati.address }}</td>
+                      <td>{{ talati.user.last_login|date:"d/m/Y" }}</td>
+                      <td>{{ talati.user.last_login|time:"h:i a" }}</td>
+                    </tr>
+                    {% endfor %}
+                  </table>
+                </div>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1" class="pagination-action">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}" class="pagination-action">previous</a>
+                        {% endif %}
+                
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        </span>
+                
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}" class="pagination-action">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-action">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+              </section>
+            </div>
+        </div>
+        </div>
+        <script>
+            document.getElementsByClassName("listtalati")[0].classList.add("active");
+        </script>
+{% endblock %}

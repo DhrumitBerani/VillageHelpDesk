@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta charset="utf-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <title>PDF Data</title>
+        <style>
+            @font-face {
+                font-family: "Noto Sans Gujarati";
+                src: url('{{ fontlink }}');
+            }
+            *,html,body{
+                font-family: 'Noto Sans Gujarati';
+            }
+            body{
+                border: 3px solid black;
+            }
+            table,tr,td{
+                font-size: 18px;
+            }
+            img{
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <b><h1 style="text-align: center; margin-top: 100px;">ચલ ચગતનું પ્રમાણપત્ર</h1></b>
+        <table style="margin: 100px 0px 0px 60px;">
+            <tr>
+                <td>હું પ્રમાણિત કરું છું કે શ્રી/શ્રીમતી/કુમારી</td><td style="width: 570px; border-bottom: 1px solid black;text-align: center;">{{ rdata.parent_name }}</td>
+            </tr>
+        </table>
+        <table style="margin: 4px 0px 0px 60px;">
+            <tr>
+                <td>ના {% if rdata.gender == 'Male' %}પુત્ર{% else %}પુત્રી{%endif%}</td>
+                <td style="width: 770px; border-bottom: 1px solid black; text-align: center;">{{ rdata.fullname }}</td>
+                <td>તેઓ</td>
+            </tr>
+        </table>
+        <table style="margin: 4px 0px 0px 60px;">
+            <tr>
+                <td>છેલ્લા</td>
+                <td style="width: 240px; border-bottom: 1px solid black; text-align: center;">{{ rdata.years }}</td>
+                <td>વર્ષોથી મને ઓળખે છે અને મારી શ્રેષ્ઠ જાણ અને માન્યતા મુજબ, તેમની/તેણીને કાયદાની </td>
+            </tr>
+        </table>
+        <table style="margin: 4px 0px 0px 60px;">
+            <tr>
+                <td>અદાલત દ્વારા ક્યારેય કાર્યવાહી/દોષિત ઠરાવવામાં આવી નથી.</td>
+            </tr>
+        </table>
+        
+        <table style="margin: 50px 0px 0px 60px;">
+            <tr>
+                <td>તેની સામે એવું કંઈ નથી કે જે તેને/તેણીને સરકારી સેવા માટે અયોગ્ય બનાવે.</td>
+            </tr>
+        </table>
+
+        <table style="margin: 50px 0px 0px 700px;">
+            <tr>
+                <td>સહી: </td>
+                <td style="width: 170px; border-bottom: 1px solid black; text-align: right;"></td>
+            </tr>
+        </table>
+        <table style="margin: 25px 0px 0px 700px;">
+            <tr>
+                <td>નામ: </td>
+                <td style="width: 170px; border-bottom: 1px solid black; text-align: right;text-align: center;">{{talati_name}}</td>
+            </tr>
+        </table>
+
+        <table style="margin: 50px 0px 0px 60px;">
+            <tr>
+                <td> હોદ્દો (ઓફિસની સીલ સાથે): Talati</td>
+            </tr>
+        </table>
+        <table style="margin: 25px 0px 0px 60px;">
+            <tr>
+                <td>સ્થળ: {{ rdata.village }}</td>
+            </tr>
+        </table>
+        <table style="margin: 25px 0px 0px 60px;">
+            <tr>
+                <td> તારીખ: {{ rdata.approval_date|date:'d/m/Y' }}</td>
+            </tr>
+        </table>
+
+        <table style="margin: 50px 0px 0px 60px;">
+            <tr>
+                <td><b>(નીચેના કોઈપણ બે દ્વારા સહી કરેલ બે અલગ પ્રમાણપત્ર): </b></td>
+            </tr>
+        </table>
+
+        <table style="margin: 20px 0px 0px 60px;">
+            <tr>
+                <td>1. એલ કેન્દ્ર અથવા રાજ્ય સરકારના ગેઝેટેડ અધિકારીઓ.</td>
+            </tr>
+        </table>
+
+        <table style="margin: 20px 0px 0px 60px;">
+            <tr>
+                <td>2. સંસદ અથવા રાજ્ય વિધાનસભાના સભ્યો.</td>
+            </tr>
+        </table>
+
+        <table style="margin: 20px 0px 0px 60px;">
+            <tr>
+                <td>3. જિલ્લા મેજિસ્ટ્રેટ અથવા સબ-ડિવિઝનલ મેજિસ્ટ્રેટ.</td>
+            </tr>
+        </table>
+
+        <table style="margin: 20px 0px 0px 60px;">
+            <tr>
+                <td>4. તહસીલદાર અથવા નાયબ/Dy.  તહસીલદાર, મેજિસ્ટ્રેટની સત્તાઓ માટે અધિકૃત.</td>
+            </tr>
+        </table>
+
+        <table style="margin: 20px 0px 0px 60px; padding-bottom: 270px;">
+            <tr>
+                <td>5. માન્યતા પ્રાપ્ત શૈક્ષણિક સંસ્થાઓના આચાર્ય છેલ્લે હાજરી આપેલ.</td>
+            </tr>
+        </table>
+
+    </body>
+    </html>

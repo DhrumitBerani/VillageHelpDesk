@@ -1,0 +1,366 @@
+{% extends "User_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Tax Payments
+{% endblock %}
+
+{% block content %}
+        <style>
+            body {
+                background-color: midnightblue;
+            }
+            .main-container {
+                background-color: white;
+                font-family: Arial, Helvetica, sans-serif;
+                height: fit-content;
+                border-radius: 17px;
+                box-shadow: 1px 1px 20px rgba(255, 255, 255, 0.1);
+            }
+            .container {
+                overflow: hidden;
+                height: fit-content;
+                margin-top: 3%;
+            }
+            .background-cover2{
+                background-color: rgba(25,25,112, 0.1);
+                position: relative;
+                margin: 0px;
+                height: 200px;
+                /* z-index: -1; */
+                padding-top: 2%;
+                border-radius: 17px 17px 0px 0px;
+                overflow: hidden;
+            }
+            .circle1{
+                position: absolute;
+                right: -5%;
+                top: -10%;
+                width: 230px;
+                height: 230px;
+                background-color: rgba(74, 3, 255, 0.2);
+                border-bottom-left-radius:  100%;
+                overflow: hidden;
+                /* z-index: -1; */
+            }
+            .circle2{
+                position: absolute;
+                right: -5%;
+                top: 12%;
+                width: 230px;
+                height: 230px;
+                background-color: rgba(74, 3, 255, 0.2);
+                border-top-left-radius:  100%;
+                overflow: hidden;
+            }
+            .main-user-info{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                padding: 15px 0;
+            }
+            .user-input-box:nth-child(2n){
+                justify-content: end;
+            }
+            .user-input-box{
+                display: flex;
+                flex-wrap: wrap;
+                width: 40%;
+                padding-bottom: 20px;
+            }
+
+            .user-input-box label{
+                width: 95%;
+                color: midnightblue;
+                font-size: 20px;
+                font-weight: 800;
+                margin: 5px 0;
+            }
+            .user-input-box input{
+                height: 45px;
+                width: 95%;
+                border-radius: 7px;
+                outline: none;
+                border: 1px solid rgba(0,0,0,0.2);
+                padding: 0 10px;
+            }
+            .form-submit-btn{
+                margin-top: 40px;
+            }
+            .form-submit-btn input {
+                display: block;
+                width: 200px;
+                height: 55px;
+                font-size: 22px;
+                font-family: "Helvetica Neue", 'Courier New', monospace;
+                color: #fff;
+                background: rgba(25, 25, 112, 1);
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+                margin: 0 auto;
+            }
+            .form-submit-btn input:hover {
+                background: rgba(157, 157, 213, 0.4);
+            }
+            .form-submit-btn input:active {
+            transform: scale(1.05);
+            }
+            .form-submit-btn input:hover{
+                background: white;
+                color: rgba(25, 25, 112, 1);
+                border: 1px solid rgba(25, 25, 112, 0.4);
+            }
+            .payment-btn input{
+                background-color: midnightblue;
+                margin-left: 0px;
+                margin-right: 0px;
+            }
+            .payment-btn{
+                display: flex;
+                margin: none;
+                align-items: flex-end;
+                justify-content: flex-end;
+                width: 90%;
+            }
+            select{
+                width: 95%;
+                padding: 13px;
+                background-color: white;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                font-size: 14px;
+            }
+            .payment_details{
+                flex: 0 0 100%;
+                margin-left: 10%;
+                margin-top: 4%;
+            }
+            .labels{
+                font-size: 20px;
+                font-weight: bold;
+                display: inline-flex;
+                width: 16%;
+                padding: 20px;
+                border-left: 5px solid black;
+                margin-top: 0.5%;
+                background-color: #e7e6e6;
+            }
+            .values{
+                font-size: 18px;
+                padding: 20px;
+            }
+            .razorpay-backdrop span{
+                display: none;
+            }
+            .pagination {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .pagination a {
+                text-decoration: none;
+            }
+            .pagination-number {
+                padding: 12px 17px;
+                border-radius: 2px;
+                color: #fff;
+                background-color: midnightblue;
+            }
+            .pagination-number:hover,
+            .pagination-current {
+                background-color: midnightblue;
+            }
+            .pagination-action {
+                margin: 0 2px;
+                color: #fff;    
+                font-size: 1em;
+                align-items: center;
+                padding: 10px 10px;
+                border-radius: 5px;
+                color: midnightblue;
+                background-color: #ffffff;
+                border: 1px solid midnightblue;
+            }
+            .pagination-action:hover,
+            .pagination-previous,
+            .pagination-next {
+                color: midnightblue;
+            }
+            section .recent-document-table{
+                background-color: white;
+                color: black;
+                border: 1px solid rgb(0,0,0,0.1);
+                border-radius: 10px;
+                margin: 40px 20px 40px 30px;
+                box-shadow: 0 0 10px rgb(0,0,0,0.1);
+            }
+            table{
+                border-collapse: collapse;
+                width: 100%;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            section .recent-document-table tr:not(:last-child){
+                border-bottom: 1px solid black;
+            }
+            table tr td,th{
+                padding: 20px;
+                text-align: center;
+            }
+            table tr:first-of-type{
+                background-color: gold;
+            }
+            .view-btn{
+                text-decoration: none;
+                padding: 10px 12px;
+                color: white;
+                background-color: midnightblue;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+            }
+        </style>
+        <div class="main-container">
+            <div class="background-cover2" >
+                <div class="circle2"></div>
+                <div class="circle1"></div>
+            <h1 style="color: midnightblue;text-align: center;margin-top: 4.5%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Quick Pay </h1>
+            <h2 style="color: midnightblue;text-align: center;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Tax Payment Service </h2>
+        </div>
+    <div class="container">
+      <form action="/taxpayment" method="POST">
+        <div class="main-user-info">
+            <div class="user-input-box">
+                <label for="ward">Ward Number</label>
+            <select id="ward" name="ward">
+                <option value="1"> Ward 1</option>
+                <option value="2"> Ward 2</option>
+                <option value="3"> Ward 3</option>
+                <option value="4"> Ward 4</option>
+                <option value="5"> Ward 5</option>
+                <option value="6"> Ward 6</option>
+                <option value="7"> Ward 7</option>
+                <option value="8"> Ward 8</option>
+                <option value="9"> Ward 9</option>
+                <option value="10"> Ward 10</option>
+            </select>
+        </div>
+        <div class="user-input-box">
+            <label for="service_type">Service Type</label>
+            <select id="service_type" name="service_type">
+                <option value="Property"> Property tax payment</option>
+                <option value="Shop"> Shops and Eastablishment Payment</option>
+                <option value="Water"> Water/Drainage Payment</option>
+            </select>
+        </div>
+        <div class="user-input-box" style="width: 100%;margin: 0 auto;margin-left: 5%;">
+          <label for="fullName">Tenament Number</label>
+          <input type="text"
+                  id="tenament_number"
+                  name="tenament_number"
+                  placeholder="Ex: 225690694007DH"/>
+        </div>
+        <div class="form-submit-btn">
+          <input type="submit" value="Search">
+        </div>
+      </form>
+      {% if tax %}
+      <div class="payment_details">
+          <span class="labels">Tenament Number: </span>  <span class="values">{{ tax.tenament_no }}</span><br>
+          <span class="labels">Occupier Name: </span>  <span class="values">{{ tax.occupier_name }}</span><br>
+          <span class="labels">Property Address: </span>  <span class="values">{{ tax.occupier_address }}</span><br>
+            <span class="labels">Payable Amount: </span>  <span class="values">Rs. {{ tax.amount }}</span><br>
+            <span class="labels">Due Date: </span>  <span class="values">{{ time }}</span><br>
+            <div class="form-submit-btn payment-btn">
+                <input type="button" id="pay-btn" value="Pay Now">
+            </div>
+      </div>
+      {% endif %}
+      <div class="payment_details" style="margin: 0%;">
+      <h2 style="color: rgb(147, 147, 147);font-size: 30px;margin: 25px 0px 0px 0px;padding: 5px 0px 5px 30px;border-top: 2px solid rgba(0, 0, 0, 0.1);border-bottom: 2px solid rgba(0, 0, 0, 0.1);">Payment History</h2>
+                <section>
+                    <div class="recent-document-table">
+                      <table>
+                        <tr>
+                          <th>Sr No.</th>  
+                          <th>Tenament No</th>
+                          <th>Service Type</th>
+                          <th>Amount</th>
+                          <th>Date & Time</th>
+                          <th>Action</th>
+                        </tr>
+                        {% for payment in page_obj %}
+                            <tr>
+                                <td>{{ forloop.counter }}.</td>
+                                <td>{{ payment.tenament_no }}</td>
+                                <td>{% if payment.type == 'Property' %} Property Tax {% elif payment.type == 'Shop' %} Shops & Establish Tax {% elif payment.type == 'Water' %} Water/Drainage Tax {% endif %}</td>
+                                <td>Rs. {{ payment.amount }}</td>
+                                <td>{{ payment.payment_date_time|date:'d-m-Y H:i' }}</td>
+                                <td><a href="/viewpaymentdetails/{{payment.tax_id}}" class="view-btn">View</a></td>
+                            </tr>
+                        {% endfor %}
+                      </table>
+                    </div>
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1" class="pagination-action">&laquo; first</a>
+                                <a href="?page={{ page_obj.previous_page_number }}" class="pagination-action">previous</a>
+                            {% endif %}
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                            </span>
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}" class="pagination-action">next</a>
+                                <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-action">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+        </section>
+    </div>
+    </div>
+</body>
+</html>
+</div>
+<script>
+    document.getElementsByClassName("payments")[0].classList.add("active");
+</script>
+{% if tax %}
+<script src="{% static '/js/razorpaycheckout.js' %}"></script>
+<script>            
+            var options = {
+                
+                // Enter the Key ID generated from the Dashboard
+                key: "{{ razorpay_merchant_key }}",
+                
+                // Amount is in currency subunits.
+                // Default currency is INR. Hence,
+                // 50000 refers to 50000 paise
+                amount: "{{ razorpay_amount }}",
+                currency: "{{ currency }}",
+                
+                // Your/store name.
+                name: "VillageHelpDesk",
+                
+                // Pass the `id` obtained in the response of Step 1
+                order_id: "{{ razorpay_order_id }}",
+                callback_url: "{{ callback_url }}",
+            };
+
+            // initialise razorpay with the options.
+            var rzp1 = new Razorpay(options);
+            
+            // add event listener to the payment button.
+            document.getElementById("pay-btn").onclick = function (e) {
+                rzp1.open();
+                e.preventDefault();
+            };
+            </script>
+{% endif %}
+{% endblock %}

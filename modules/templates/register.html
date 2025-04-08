@@ -1,0 +1,122 @@
+<!-- font -->  
+{% load static %}
+<!-- <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="{% static '/styles/register.css' %}" rel="stylesheet">
+</head>
+        
+<body id="body">
+    <form method="POST" action="/handlesignup">
+        {% csrf_token %}
+            <h2>Sign up</h2>
+            <input type="text" name="firstname" placeholder="Enter First Name">
+            <input type="text" name="lastname" placeholder="Enter Last Name">
+            <input type="number" name="mobilenumber" placeholder="Mobile Number">
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Your password">
+            <input type="submit">Sign in</input>
+    </form>
+    <div class="circle"></div>
+    <div class="circle-1"></div>
+    <div class="circle-2"></div> -->
+
+<!-- new page sign_up -->
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static '/styles/register.css' %}" rel="stylesheet">
+    <title>Registation</title>
+  </head>
+  <body>
+    <div class="main_container">
+      <div class="container1">
+        <div class="heading1">
+          <h1>Create Your Account</h1>
+          <p>Please enter Your details</p>
+        </div>
+        <div class="outer_content">
+        <div class="content" id="content">
+            <form method="POST" action="/handlesignup">
+            <div class="name_div">
+                <div class="firstname">
+                    <label for="name" id="name_lable">First Name</label>
+                    <input type="text" id="name_input" name="firstname" required="required"/>
+                </div>
+                <div class="lastname">
+                    <label for="name" id="name_lable">Last Name</label>
+                    <input type="text" id="name_input" name="lastname" required="required"/>
+                </div>
+            </div>
+            <div class="second_field">
+
+            
+            <div class="gender">
+              <label for="gender" id="gender_lable">Gender</label>
+              <div class="gender_input_div" style="display: block">
+                <input type="radio" name="gender" id="gender" value="Male" checked/>
+                <label for="male">Male</label>
+                <input type="radio" name="gender" id="gender" value="Female"/>
+                <label for="female">Female</label>
+              </div>
+            </div>
+            <div class="village_div">
+              <label for="name" id="village_lable" style="margin-left:10px;">Village</label>
+              <!-- <input type="text" id="village_input" /> -->
+              <select name="village" id="village_input"  style="margin-left:10px;font-size: 17px;" required="required">
+                {% for village_name in villages %}
+                    <option value="{{village_name.VillageId}}">{{ village_name.village_name }}</option>    
+                {% endfor %}
+              </select>
+            </div>
+        </div>
+        <div class="mnumber_div">
+            <label for="name" id="mnumber_lable">Mobile Number</label>
+            <input type="text" id="mnumber_input" name="mobilenumber" required="required"/>
+          </div>
+            <div class="email_div">
+              <label for="name" id="email_lable">Email</label>
+              <input type="email" id="email_input" name="email" required="required"/>
+            </div>
+
+            <div class="password_div">
+              <label for="name" id="password_lable">Password</label>
+              <input type="password" name="password" id="password_input"  required="required"/>
+            </div>
+            <input type="submit" value="Sign Up">
+            <input type="button" value="Return" style="margin-top: 2px;" onclick="window.location.href='/'">
+          </div>
+        </div>
+        </form>
+            <!-- <button id="next_button" href="/registetr">Register</button> -->
+
+      </div>
+      <div class="container2">
+        <div class="heading2">
+          <h1>
+            Register with Village HelpDesk & Get Your Digital Documents
+          </h1>
+          <br />
+          <p>
+            <img src="{% static 'images/village_users.jpg' %}" width="100%" height="100%" style="border-radius: 4%;margin-top: 50px;"">
+          </p>
+          <br />
+        </div>
+        <div class="img_field">
+          <!-- Just Images Area -->
+        </div>
+      </div>
+    </div>
+    <script>
+      const sendButton = document.getElementById("next_button");
+      sendButton.addEventListener("click", function () {
+        sendButton.classList.add("clicked");
+      });
+    </script>
+  </body>
+</html>

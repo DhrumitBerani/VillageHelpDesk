@@ -1,0 +1,220 @@
+{% extends "Talati_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Complaint
+{% endblock %}
+
+{% block content %}
+
+        <style>
+            body {
+                /* background-color: #f6f6f6; */
+                background-color: midnightblue;
+            }
+            .main-container {
+                font-family: 'Muli';
+                background-color: white;
+                height: fit-content;
+                border-radius: 17px;
+                box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
+                padding-bottom: 10px;
+            }
+            .background-cover{
+                background-image: url('{% static '/images/Opinion.jpeg' %}');
+                background-size: cover;
+                background-position: center;
+                filter: blur(0px) brightness(85%);
+                margin: 0px;
+                height: 100vh;
+                /* z-index: -1; */
+                padding-top: 2%;
+                display: flex;
+            }
+            .background-cover2{
+                background-color: rgba(25,25,112, 0.1);
+                position: relative;
+                margin: 0px;
+                height: 200px;
+                /* z-index: -1; */
+                padding-top: 2%;
+                border-radius: 17px 17px 0px 0px;
+                overflow: hidden;
+                /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+            }
+            .circle1{
+                position: absolute;
+                right: -5%;
+                top: -10%;
+                width: 230px;
+                height: 230px;
+                /* filter: blur(10px); */
+                background-color: rgba(74, 3, 255, 0.2);
+                border-bottom-left-radius:  100%;
+                /* border-top-left-radius:  100%; */
+                overflow: hidden;
+                /* z-index: -1; */
+            }
+            .circle2{
+                position: absolute;
+                right: -5%;
+                top: 12%;
+                width: 230px;
+                height: 230px;
+                /* filter: blur(60px); */
+                background-color: rgba(74, 3, 255, 0.2);
+                border-top-left-radius:  100%;
+                overflow: hidden;
+            }
+            .container{
+                padding: 50px;
+            }
+            .form-head{
+                display: inline-block;
+                font-size: 2.7vh;
+                width: 15%;
+                padding: 10px 4px;
+                font-family: sans-serif;
+                color: midnightblue;
+                margin-top: 5px;
+            }
+            input,textarea{
+                border-radius: 7px;
+                font-size: 2vh;
+                outline: none;
+                border: 1px solid rgba(0,0,0,0.2);
+                padding: 10px;
+                resize: none;
+            }
+            .complaint-img{
+                width: 40%;
+                float: left;
+                margin: 5% 4%;
+            }
+            .savebtn,input[type=reset]{
+                margin-top: 10px;
+                margin-right: 10px;
+                font-size: 15.5px;
+                color: white;
+                font-weight: bold;
+            }
+            .savebtn{
+                background-color: midnightblue;
+            }
+            input[type=reset]{
+                background-color: white;
+                color: midnightblue;
+            }
+            .savebtn:hover{
+                color: midnightblue;
+                background-color: white;
+                cursor: pointer;
+            }
+            input[type=reset]:hover{
+                color: white;
+                background-color: midnightblue;
+                cursor: pointer;
+            }
+            section .recent-document-table{
+                background-color: white;
+                color: black;
+                border: 1px solid rgb(0,0,0,0.1);
+                border-radius: 10px;
+                margin: 40px 20px 40px 30px;
+                box-shadow: 0 0 10px rgb(0,0,0,0.1);
+            }
+            table{
+                border-collapse: collapse;
+                width: 100%;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            section .recent-document-table tr:not(:last-child){
+                border-bottom: 1px solid black;
+            }
+            table tr td,th{
+                padding: 20px;
+                text-align: center;
+            }
+            table tr:first-of-type{
+                background-color: gold;
+            }
+            .view-btn{
+                text-decoration: none;
+                padding: 10px 12px;
+                color: white;
+                background-color: midnightblue;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+            }
+            .pagination {
+                display: flex;
+                margin-top: 15px;
+                margin-left: 25px;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 25px;
+            }
+            .pagination a {
+                text-decoration: none;
+            }
+
+            .pagination-number {
+                padding: 12px 17px;
+                border-radius: 2px;
+                color: #fff;
+                background-color: midnightblue;
+            }
+
+            .pagination-number:hover,
+            .pagination-current {
+                background-color: midnightblue;
+            }
+
+            .pagination-action {
+                margin: 0 2px;
+                color: #fff;    
+                font-size: 1em;
+                align-items: center;
+                padding: 10px 10px;
+                border-radius: 5px;
+                color: midnightblue;
+                background-color: #ffffff;
+                border: 1px solid midnightblue;
+            }
+
+            .pagination-action:hover,
+            .pagination-previous,
+            .pagination-next {
+                color: midnightblue;
+            }
+        </style>
+        <div class="main-container">
+            <div class="background-cover2" >
+                <div class="circle2"></div>
+                <div class="circle1"></div>
+                <h1 style="color: midnightblue;text-align: center;margin-top: 4.5%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> News Section </h1>
+                <h3 style="color: midnightblue;text-align: center;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Update NewsBoard of homepage from here </h3>
+            </div>
+            <div id="main">
+                <img src="{% static 'images/complaint.png' %}" class="complaint-img"/>
+                <div class="container">
+                  <form method="POST" action="/handle_news_data" id="complaint-form">
+                    <input type="hidden" name="news_id" value="{% if news_id %}{{news_id}}{% else %}0{% endif %}">
+                    <span class="form-head"><b>Title</b></span><input type="text" name="title" id="form-ttl" value="{{ news_title }}" placeholder="Enter title here" required style="width:45%;"><br>
+                    <span class="form-head" style="vertical-align: top;"><b>Description</b></span><textarea id="form-desc" name="description" rows="7"  style="width: 45%;" required placeholder="Describe your issue here">{{news_description}}</textarea><br>
+                    <input type="submit" class="savebtn" value="Submit">  
+                    <input type="reset" class="clsbtn" value="Clear">
+                  </form>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.getElementsByClassName("news")[0].classList.add("active");
+        </script>
+{% endblock %}

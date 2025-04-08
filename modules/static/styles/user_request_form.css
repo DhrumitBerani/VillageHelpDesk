@@ -1,0 +1,161 @@
+.main_form_container {
+	background-color: white;
+	height: 95%;
+	width: 76%;
+	border-radius: 10px;
+	margin: 0% 0% 0% 0.4%;
+	box-shadow: 0 0 10px rgb(0, 0, 0, 0.8);
+	position: fixed;
+}
+
+.back_button {
+	background-color: gold;
+	padding-bottom: 3%;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.inner_button {
+   /* background-color: red; */
+   margin: 2% 0% 0% 2%;
+}
+
+.last_inner_button {
+	background-color: blue;
+	padding: 15px 15px;
+    font-size: 13px;
+    font-weight: 900;
+	border-radius: 4px;
+	color: white;
+	text-decoration: none;
+	border: none;
+	font-size: 16px;
+	margin-top: 2px;
+	width: 100px;
+}
+.last_inner_button:hover {
+    cursor: pointer;
+}
+.user_name {
+    /* background-color: red; */
+	padding-top: 30px;
+    margin: auto;
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'Times New Roman', Times, serif;
+}
+/* -------------------------------------- */
+.user_data_container {
+	/* background-color: pink; */
+	height: 72%;
+	overflow-y: auto;
+	text-align: center;
+	/* display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px; */
+
+}
+
+.user_details {
+	/* background-color: pink; */
+	height: 72%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	padding: 15px;
+}
+
+.user_data_box {
+	/* background-color: red; */
+	display: flex;
+    /* justify-content: center; */
+	/* border: 2px solid black; */
+    /* align-items: center; */
+}
+
+.user_data_title {
+	border: 2px solid black;
+	margin: 15px;
+	font-family: 'Times New Roman', Times, serif;
+}
+
+.user_data_field {
+	color: midnightblue;
+	font-size: 20px;
+	font-weight: 900;
+	/* padding: 5px; */
+	height: 40%;
+	font-family: 'Times New Roman', Times, serif;
+
+}
+
+.user_data {
+	color: black;
+	font-size: 19px;
+}
+.images {
+    height: 50%;
+}
+/* -------------------------------------- */
+.action_buttons {
+	/* background-color: brown; */
+	height: 11.5%;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+}
+
+.reject {
+	/* background-color: blue; */
+	margin-top: 1.6%;
+	width: 25%;
+}
+
+.approve {
+	/* background-color: aqua; */
+	margin-top: 1.6%;
+	width: 20%;
+}
+
+.reject_button {
+	background-color: #ff2e43;
+	padding: 4%;
+	border: none;
+	border-radius: 5%;
+	color: white;
+	margin-left: 5px;
+	font-size: 18px;
+	font-family: arial , Georgia, Times, 'Times New Roman', serif;
+	font-weight: bold;
+}
+
+.approve_button {
+	color: white;
+	background-color: green;
+	padding: 5%;
+	border: none;
+	border-radius: 5%;
+	font-family: arial , Georgia, Times, 'Times New Roman', serif;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#reasons {
+	/* margin-right: 10px; */
+	padding: 10px;
+	/* background-color: white; */
+	border: 2px solid rgb(0, 0, 0, 0.1);
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.reject_button,
+#reasons:hover {
+	cursor: pointer;
+}

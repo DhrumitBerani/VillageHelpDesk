@@ -1,0 +1,115 @@
+{% extends "User_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Dashboard
+{% endblock %}
+
+{% block content %}
+
+  <!-- link css file to current page -->
+  <link rel="stylesheet" href="{% static 'styles/user_dashboard.css' %}">
+
+  <!-- highlight current page in dashboard -->
+  <script>
+    document.getElementsByClassName("dashboard")[0].classList.add("active");
+  </script>
+
+<div class="main-content">
+    <div class="bubble1"></div>
+    <div class="bubble2"></div>
+  </div>
+  <!-- <div class="notification-icon" style="cursor:pointer;position: absolute;right: -10;top: 30px;background-color: white;float: right;border-top-left-radius: 100%;;border-bottom-left-radius: 100%;width: 50px;height: 50px;display: flex;justify-content: center;align-items: center;">
+    <i class="fa fa-bell" style="color: white;font-size: 20px;float: right;color: black;"></i>
+  </div> -->
+  <div class="hero-line">
+    <i class="fa fa-home"></i> / Dashboard<br>
+    <h2>Dashboard</h2>
+    
+      {% if user.is_authenticated %}
+        <h4 style="display: inline;">User :</h4> {{ request.user.first_name }} {{ request.user.last_name }} 
+      {% else %}
+        <h4 style="display: inline;">User :</h4> Guest
+      {% endif %}
+    
+  </div>
+  <section class="calculation-container">
+    <div class="calculation-box">
+      <h3>Document Requests</h3>
+      <h1 style="font-size: 40px;margin-left: 0px;margin-bottom: 15px;margin-top: 10px;">{{certificate_count}}</h1>
+      <span>requests are awaiting</span>
+      <div class="icon-circle" style="background-image: linear-gradient(310deg, #1171ef, #11cdef);">
+        <i class="fa fa-hourglass-end"></i>
+      </div>
+    </div>
+    <div class="calculation-box">
+      <h3>Complaint Records</h3>
+      <h1 style="font-size: 40px;margin-left: 0px;margin-bottom: 15px;margin-top: 10px;">{{complaint_count}}</h1>
+      <span>are waiting to resolve</span>
+      <div class="icon-circle" style="background-image: linear-gradient(310deg, #f5365c, #f67e5d);">
+        <i class="fa fa-exclamation"></i>
+      </div>
+    </div>
+    <div class="calculation-box" style="margin-right: 10px;">
+      <h3>Total Tax Paid</h3>
+      <h1 style="font-size: 40px;margin-left: 0px;margin-bottom: 25px;margin-top: 10px;">Rs. {{tax_amount}}</h1>
+      <span>amount paid till today</span>
+      <div class="icon-circle" style="background-image: linear-gradient(310deg, #fb6340, #fbb140);">
+        <i class="fa fa-credit-card"></i>
+      </div>
+    </div>
+  </section>
+  <h2 style="color: rgb(147, 147, 147);font-size: 30px;margin: 30px 0px 0px 30px;">Recent Updates</h2>
+  <section>
+    <div class="recent-document-table">
+      <table>
+        <tr>
+          <th>Sr No.</th>  
+          <th>Document Type</th>
+          <th>Apply Date & Time</th>
+          <th>Status</th>
+        </tr>
+
+        <tr>
+          <td>1.</td>
+          <td>Income Certificate</td>
+          <td>26/08/2023 11:52 AM</td>
+          <td>Pending</td>
+        </tr>
+
+        <tr>
+          <td>2.</td>
+          <td>Character Certificate</td>
+          <td>21/08/2023 12:32 PM</td>
+          <td>Pending</td>
+        </tr>
+
+        <tr>
+          <td>3.</td>
+          <td>Cast Certificate</td>
+          <td>20/08/2023 16:57 PM</td>
+          <td>Rejected</td>
+        </tr>
+
+        <tr>
+          <td>4.</td>
+          <td>Crimilayer Certificate</td>
+          <td>17/08/2023 10:08 PM</td>
+          <td>Approved</td>
+        </tr>
+
+        <tr>
+          <td>5.</td>
+          <td>Birth Certificate</td>
+          <td>11/08/2023 18:22 PM</td>
+          <td>Approved</td>
+        </tr>
+        <tr>
+          <td colspan="4" style="text-align: center;width: 100%;"><a href="/documentrecords" style="text-decoration: none;font-size: 18px;">View all</a></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+{% endblock %}

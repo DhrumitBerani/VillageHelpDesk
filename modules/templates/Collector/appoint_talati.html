@@ -1,0 +1,330 @@
+{% extends "Collector_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Complaint
+{% endblock %}
+
+{% block content %}
+
+        <style>
+            body {
+                background-color: midnightblue;
+            }
+            .main-container {
+                background-color: white;
+                font-family: 'Muli';
+                height: fit-content;
+                border-radius: 17px;
+                box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
+                padding-bottom: 10px;
+            }
+            .background-cover2{
+                background-color: rgba(25,25,112, 0.1);
+                position: relative;
+                margin: 0px;
+                height: 200px;
+                /* z-index: -1; */
+                padding-top: 2%;
+                border-radius: 17px 17px 0px 0px;
+                overflow: hidden;
+                /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+            }
+            .circle1{
+                position: absolute;
+                right: -5%;
+                top: -10%;
+                width: 230px;
+                height: 230px;
+                /* filter: blur(10px); */
+                background-color: rgba(74, 3, 255, 0.2);
+                border-bottom-left-radius:  100%;
+                /* border-top-left-radius:  100%; */
+                overflow: hidden;
+                /* z-index: -1; */
+            }
+            .circle2{
+                position: absolute;
+                right: -5%;
+                top: 12%;
+                width: 230px;
+                height: 230px;
+                /* filter: blur(60px); */
+                background-color: rgba(74, 3, 255, 0.2);
+                border-top-left-radius:  100%;
+                overflow: hidden;
+            }
+            .container{
+                padding: 50px;
+            }
+            .form-head{
+                display: inline-block;
+                font-size: 2.7vh;
+                width: 17%;
+                padding: 10px 4px;
+                font-family: sans-serif;
+                color: midnightblue;
+                border-left: 5px solid midnightblue;
+                margin-top: 1.5%;
+                background-color: rgba(0, 0, 0, 0.04);
+            }
+            .complaint-data{
+                font-size: 2.6vh;
+                padding: 10px 20px;
+            }
+            .view-btn{
+                text-decoration: none;
+                padding: 10px 12px;
+                color: white;
+                background-color: midnightblue;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+                font-size: 18px;
+            }
+            .responsive-container{
+                display: flex;
+            }
+            .responsive-container > *{
+                flex: 0 0 auto;
+            }
+            .responsive .form-head{
+                width: 150px;
+            }
+            .responsive-container .complaint-data{
+                width: 80%;
+                margin-top: 12px;
+            }
+            .profile_image{
+                width: 150px;
+                height: 150px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 100%;
+            }
+            .edit_button{
+                text-decoration: none;
+                padding: 17px 20px;
+                color: black;
+                background-color: gold;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+                position: absolute;
+                right: 15;
+            }
+            input{
+                height: 45px;
+                width: 40%;
+                border-radius: 7px;
+                outline: none;
+                border: 1px solid rgba(0,0,0,0.2);
+                padding: 0 9px;
+                font-size: 17px;
+            }
+            .select-section{
+                border: 1px solid rgba(0,0,0,0.2);
+                padding: 10px 20px;
+                background-color: white;
+                outline: none;
+                border-radius: 7px;
+                width: 40%;
+                font-size: 17px;
+            }
+            h1{
+                font-size: 30px;
+            }
+        </style>
+        <div class="main-container">
+            <div class="background-cover2" >
+                <div class="circle2"></div>
+                <div class="circle1"></div>
+                <h1 style="color: midnightblue;text-align: center;margin-top: 3.5%;margin-left:2%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Appoint Talati </h1>
+                <h2 style="color: midnightblue;text-align: center;margin-top: 3.5%;margin-left:2%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Register Talati Information here</h2>
+            </div>
+            <div id="main">
+                <form id="form" action="/handle_talati_creation" method="POST" enctype="multipart/form-data">
+                <div class="container">
+                    <h1 style="color: #a4a3a3;margin: 0% 0% 2% 0%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Personal Information</h1>
+                    <span class="form-head"><b>First Name</b></span>
+                    <span class="complaint-data"><input type="text" name="firstname" placeholder="Enter Firstname" required></span><br>
+                    
+                    <span class="form-head"><b>Last Name</b></span>
+                    <span class="complaint-data"><input type="text" name="lastname" placeholder="Enter Lastname" required></span><br>
+                    
+                    <span class="form-head"><b>Gender</b></span>
+                    <span class="complaint-data">
+                        <input type="radio" name="gender" value="Male" id="gender1" style="height: inherit;margin: 0;padding: 0;width: inherit;"/> Male
+                        <input type="radio" name="gender" Value="Female" id="gender2" style="margin-left: 30px;height: inherit;margin: 0;padding: 0;width: inherit;"/>Female<br>
+                    
+                    <h1 style="color: #a4a3a3;margin: 4% 0% 2% 0%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Contact Information</h1>
+                    <span class="form-head"><b>Mobile Number</b></span>
+                    <span class="complaint-data"><input type="text" name="mobilenumber" placeholder="Enter Mobile Number" required></span><br>
+                    
+                    <span class="form-head"><b>Email Id</b></span>
+                    <span class="complaint-data"><input type="text" name="emailid" placeholder="Enter Email Id" required><br>
+                    
+                    <span class="form-head"><b>Address</b></span>
+                    <span class="complaint-data"><input type="text" name="address" placeholder="Enter Address"></span><br>
+        
+
+                    <h1 style="color: #a4a3a3;margin: 4% 0% 2% 0%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Village Allocation</h1>
+                    <span class="form-head"><b>Allocation 1</b></span>
+                        <span class="complaint-data">
+                        <select class="select-section" name="village_id_1" id="village_id_1">
+                            <option value="0" >Select Village</option>
+                            {% for village_name in villages %}
+                                {% if village_name.talati_id == 0 %}
+                                    <option value="{{village_name.VillageId}}">{{ village_name.village_name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </span><br>
+                    
+                    <span class="form-head"><b>Allocation 2</b></span>
+                    <span class="complaint-data">
+                    <select class="select-section" name="village_id_2" id="village_id_2">
+                            <option value="0" >Select Village</option>
+                            {% for village_name in villages %}
+                                {% if village_name.talati_id == 0 %}
+                                    <option value="{{village_name.VillageId}}">{{ village_name.village_name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                    </select>
+                    </span><br>
+
+                    <span class="form-head"><b>Allocation 3</b></span>
+                    <span class="complaint-data">
+                    <select class="select-section" name="village_id_3" id="village_id_3">
+                            <option value="0" >Select Village</option>
+                            {% for village_name in villages %}
+                                {% if village_name.talati_id == 0 %}
+                                    <option value="{{village_name.VillageId}}">{{ village_name.village_name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                    </select>
+                    </span><br>
+
+                    <span class="form-head"><b>Allocation 4</b></span>
+                    <span class="complaint-data">
+                    <select class="select-section" name="village_id_4" id="village_id_4">
+                            <option value="0" >Select Village</option>
+                            {% for village_name in villages %}
+                                {% if village_name.talati_id == 0 %}
+                                    <option value="{{village_name.VillageId}}">{{ village_name.village_name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                    </select>
+                    </span><br>
+
+                    <span class="form-head"><b>Allocation 5</b></span>
+                    <span class="complaint-data">
+                    <select class="select-section" name="village_id_5" id="village_id_5">
+                            <option value="0" >Select Village</option>
+                            {% for village_name in villages %}
+                                {% if village_name.talati_id == 0 %}
+                                    <option value="{{village_name.VillageId}}">{{ village_name.village_name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                    </select>
+                    </span><br>
+
+                    <span class="form-head"><b>Signature</b></span>
+                    <span class="complaint-data"><input type="file" name="signature" style="height: 40px;padding: 7px;" required></span><br> 
+
+                    <span class="form-head"><b>Password</b></span>
+                    <span class="complaint-data"><input type="password" name="password" id="password" placeholder="Enter Password" required style="height: 40px;padding: 7px;"></span> <img src=""/><br>
+
+                    <span class="form-head"><b>Confirmation</b></span>
+                    <span class="complaint-data"><input type="password" name="confirm-password" id="cpassword" placeholder="Re-enter Password" required style="height: 40px;padding: 7px;"></span><br> <img src=""/>
+
+                </div>
+                <center><input type="submit" class="view-btn" value="Save Changes"  style="width:fit-content;background-color: #198754;color: white;"></center>
+                <br>
+                <center><a href="/collectordashboard" class="view-btn" >Go Back</a></center>
+                </form>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+        <script src="{% static '/js/jquery-3.6.3.js' %}"></script>
+        <script>
+            document.getElementsByClassName("appointtalati")[0].classList.add("active");
+            let Form = document.getElementById("village_form");
+
+            Form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                let password = document.getElementById("password");
+                let cpassword = document.getElementById("cpassword");
+                const selectedValues = Array.from(document.querySelectorAll("[id^='village_id_']")).map(el => el.value);
+                const unique = new Set(selectedValues.filter(value => value !== "0")).size === selectedValues.filter(value => value !== "0").length;
+
+                if(password.value != cpassword.value){
+                    window.alert("Please Re-check Both Password Fields!");
+                }if(!unique){
+                    console.log("Not Unique Items");
+                    window.alert("Please allocate unique villages");
+                }else{
+                    Form.submit();
+                }
+            });
+            
+            
+            // let Form = document.getElementById("form");
+
+            // Form.addEventListener("submit", (e) => {
+            // e.preventDefault();
+
+            // let username = document.getElementById("password");
+            // let password = document.getElementById("cpassword");
+            // let v1 = document.getElementById("village_id_1").value;
+            // let v2 = document.getElementById("village_id_2").value;
+            // let v3 = document.getElementById("village_id_3").value;
+            // let v4 = document.getElementById("village_id_4").value;
+            // let v5 = document.getElementById("village_id_5").value;
+            
+            // var unique = false;
+            // const selectElements = [
+            //         document.getElementById("village_id_1"),
+            //         document.getElementById("village_id_2"),
+            //         document.getElementById("village_id_3"),
+            //         document.getElementById("village_id_4"),
+            //         document.getElementById("village_id_5")
+            // ];
+            // selectElements.forEach((select, index) => {
+            //     select.addEventListener("change", () => {
+            //         const selectedValue = select.value;
+            //         const isUnique = isValueUnique(selectedValue, index);
+            //         if (!isUnique) {
+            //             unique = false;
+            //         }else{
+            //             unique = true;
+            //         }
+            //     });
+            // });
+            // function isValueUnique(value, currentIndex) {
+            //     for (let i = 0; i < selectElements.length; i++) {
+            //         if (i !== currentIndex && selectElements[i].value === value) {
+            //             return false;
+            //         }
+            //     }
+            //     return true;
+            // }
+
+            // if(username.value != password.value){
+            //     window.alert("Please Re-check Both Password Fields!");
+            // }if(v1=="select" || v2=="select" || v3=="select" || v4=="select" || v5=="select"){
+            //     window.alert("Please select all village allocations");
+            // }if(!unique){
+            //     window.alert("Please allocate unique villages");
+            // }else{
+            //     Form.submit();
+            // }
+            // });
+        </script>
+{% endblock %}

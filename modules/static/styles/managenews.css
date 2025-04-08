@@ -1,0 +1,104 @@
+body {
+    background-color: midnightblue;
+}
+.main_container {
+    background-color: midnightblue;
+    height: fit-content;
+    float: left;
+    width: 100%;
+}
+.route_tracker {
+    background-color: blue;
+    color: blue;
+}
+.sub_container {
+    background-color: white;
+    height: fit-content;
+    margin: 0% 0.5% 1% 0%;
+    text-align: center;
+    border-radius: 10px;    
+}
+.container {
+    padding: 2%;
+    width: 96%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 30px;
+    column-gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+.title_div {
+    background-color: rgba(25,25,112, 0.06);
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2); 
+    padding: 30px;
+}
+header {
+    padding: 0px;
+    width: 100%;
+    display: block;
+    margin-left: 3%;
+    position: relative;
+    padding-bottom: 60px;
+}
+header h1{
+    color: #767676;
+    text-align: left;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+}
+
+header span button{
+    position: absolute;
+    right: 0;
+    padding: 10px 20px;
+    background-color: midnightblue;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-right: 14px;
+    margin-top: 19px;
+    cursor: pointer;
+}
+h1 {
+    color: #333;
+}
+
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.news-article {
+    background-color: #fff;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    /* box-shadow: 0 19px    38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.1); */
+    box-shadow: 0px 0px 10px #ccc;
+    margin-bottom: 30px;
+    padding: 20px;
+    flex-basis: calc(33.33% - 20px);
+    border-radius: 8px;
+    border: 1px solid rgba(204, 204, 204,0.5);
+    cursor: pointer;
+}
+h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+time {
+    color: #999;
+    font-style: italic;
+}

@@ -1,0 +1,191 @@
+<html style="margin-top:-16px;">
+{% load static %}
+<head>
+    <title>Village HelpDesk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'styles/homestyles.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+    <div class="design-section">
+        <ul>
+            <img class="header-logo" width="60" height="60" src="{% static 'images/logo.png' %}"/>
+            <p class="main-head">Village HelpDesk</p>
+            <li class="home">
+                <a class="active" href="/">Home</a>
+            </li>
+            <li>
+                <a href="#our-services">Services</a>
+            </li>
+            <li>
+                <a href="#about_us">About Us</a>
+            </li>
+            <li>
+                <a href="#contact-us">Contact Us</a>
+            </li>
+            <li class="signup">
+                <a href="/register">Sign up</a>
+            </li>
+            <li class="signin">
+                <a href="/login">Sign in</a>
+            </li>
+            
+        </ul>
+        <p class="initial-heading">Have a new document request?</p>
+        <p class="initial-description"> Just submit your document information and <br>Get your documents signed digitally also <br>renew them hassle-free on the go</p>
+        <button class="create-account-btn button" onclick="window.location.href='/register'">CREATE ACCOUNT</button>
+        <button class="contact-us-btn button" onclick="window.location.href='#contact-us'">CONTACT US</button>
+        <img class="document-image" width="600" src="{% static 'images/about.jpg' %}">
+    </div>
+    <section class="about-us">
+        <div class="curve"></div>
+        <h2 class="section-heading services" id="our-services">OUR SERVICES</h2>
+        <p style="text-align: center;letter-spacing: 3;">HERE ARE SOME OF OUR SERVICES LISTED BELOW</p>
+        
+        <div class="flex-container">
+            <div class="service-box">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="300 0 400 120" preserveAspectRatio="none">
+                        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" class="fill-success"></path>
+                    </svg>
+                <div class="circle-icon">
+                    <i class="fa fa-file-text"></i>
+                </div>
+                <h2>Document Digitalization</h2>
+                <p>No need to stand in queue for long from fill-ups, just apply online & get your documents as per time specification</p>
+            </div>
+            <div class="service-box">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="240 0 400 120" preserveAspectRatio="none">
+                    <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" class="fill-success"></path>
+                </svg>
+                <div class="circle-icon">
+                    <i class="fa fa-credit-card"></i>
+                </div>
+                <h2>Tax Payment <br>Services</h2>
+                <p>Chekout Online Tax Payment Service to pay for property taxes without stepping out of your home</p>
+            </div>
+            <div class="service-box">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="150 0 400 120" preserveAspectRatio="none">
+                    <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" class="fill-success"></path>
+                </svg>
+                <div class="circle-icon">
+                    <i class="fa fa-question"></i>
+                </div>
+                <h2>Ask <br>Questions</h2>
+                <p>We provide Inquiry system to answer your compalaints or any query related to the document services or your payment issues.</p>
+            </div>
+        </div>
+    </section>
+    <section id="about_us">
+        <div>
+            <img src="{% static 'images/village_user.jpg' %}" width="500">
+        </div>
+        <div>
+            <h1> About Us </h1>
+            <p>We are here to provide you document related services and tax payment services, we are also providing inquiry system to resolve your queries.<br> We provide voting section for you to let you vote<br> for your favourable project</p>
+            <p>Feel Free to Contact Us</p>
+            <a href="#contact-us">Learn More</a>
+        </div>
+        
+    </section>
+    <div class="hr-line"></div>  
+    <section>
+        <h2 class="section-heading news">NEWS BOARD</h2>
+        <div class="news-container effect7">
+            <div class="latest-news-box content-container">
+                <span class="news-row"><i class="fa fa-bell-o"></i> <span style="margin-left: 10px;">Latest News Updates</span></span>
+                <div class="latest-news marqee">
+                    <marquee direction="up">
+                        {% for news in news_list %}
+                        <h3 style="color: black;"><b>{{news.news_date_time|date:"d/m/Y"}}</b> : {{news.title}}</h3>
+                        <p>{{news.description}}</p>
+                        {% endfor %}
+                    </marquee>
+                </div>
+            </div>
+            <div class="voting-box content-container">
+                <span class="news-row"><i class="fa fa-bullhorn"></i> <span style="margin-left: 10px;">Upcoming Projects</span></span>
+                <marquee direction="up">
+                    {% for result in votingresult %}
+                        <span style="color: black;margin-left: 5px;"><b>Declared On:</b> {{ result.result_date_time|date:'d-m-Y'}}</span>
+                        <!-- <a href="#"><i class="fa fa-angle-double-right"></i>{{ result.result_json|safe}}</a> -->
+                        <a href="#"></i>{{ result.result_json|safe}}</a>
+                    {% endfor %}
+                    <!-- <a href="#">Railway Overbridge Construction <i class="fa fa-angle-double-right"></i></a>
+                    <a href="#">Shaligram Hospital Construction <i class="fa fa-angle-double-right"></i></a> -->
+                </marquee>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-heading contact-us" id="contact-us">Contact Us</h2>
+        <h2 class="script-line" style="text-align: center;color: #808080;margin: auto;">Any question or remarks? Just write us a message!</h2>
+        <div class="contact-us-container">
+            <div class="left-section">
+                <h2 style="color: white;font-size: 40px;margin: 40px 0px 0px 0px;">Contact Information</h2>
+                <p style="color: #e4d3ed;font-size: 20px;margin: 20px 0px 0px 0px;">Fill up the contact form by your suggestions and we will get back to you via e-mail.</p>
+                <p style="color: white;margin: 70px 0px 40px 0px;"><i class="fa fa-phone" style="font-size: 25px;color:gold;"></i> +91 987654321</p>
+                <p style="color: white;margin: 40px 0px;"><i class="fa fa-envelope-o" style="font-size: 25px;color:gold;margin-left: -5px;"></i> support@villagehelpdesk.com</p>
+                <p style="color: white;margin: 40px 0px 70px 0px;"><i class="fa fa-map-marker" style="font-size: 25px;color:gold;"></i> 402, GMCA, Maninagar, Ahmedabad</p>
+                <p class="icon-links" style="font-size: 25px;color: white;">
+                    <i class="fa fa-facebook"></i>
+                    <i class="fa fa-twitter"></i>
+                    <i class="fa fa-instagram"></i>
+                    <i class="fa fa-linkedin"></i>
+                </p>
+                <div class="bigbubble"></div>
+                <div class="minibubble"></div>
+            </div>
+            <div class="right-section">
+                <div class="form-wrapper">
+                <form action="contactusmail" class="form" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label class="form-label" for="first">First Name</label>
+                      <input id="first" name="firstname" class="form-input" type="text" />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="last">Last Name</label>
+                      <input id="last" name="lastname" class="form-input" type="text" />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="email">Email Id</label>
+                      <input id="email" name="emailid" class="form-input" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone</label>
+                        <input id="phone" name="phonenumber" class="form-input" type="number" />
+                    </div>
+                    <div class="form-group">
+                        <label style="color: #999;font-size: 12px;" for="message">Message</label>
+                        <textarea id="message" name="message" class ="form-input"></textarea>
+                        <!-- <input id="message" class="form-input" type="number" /> -->
+                    </div>
+                    <div>
+                        <button class="button" type="submit">Send Message</button>
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    <p style="margin-top: 10px;">‎</p>
+    </section>
+    
+    <script>
+        $('input').focus(function(){
+            $(this).parents('.form-group').addClass('focused');
+        });
+        $('input').blur(function(){
+            var inputValue = $(this).val();
+            if ( inputValue == "" ) {
+                $(this).removeClass('filled');
+                $(this).parents('.form-group').removeClass('focused');
+            } else {
+                $(this).addClass('filled');
+            }
+        }); 
+    </script>
+    <footer>
+        
+    </footer>
+</body>
+</html>

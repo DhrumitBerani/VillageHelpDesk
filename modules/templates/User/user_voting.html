@@ -1,0 +1,293 @@
+{% extends "User_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Vote
+{% endblock %}
+
+{% block content %}
+        <style>
+            body {
+                background-color: #f6f6f6;
+            }
+            .main-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family:Arial, Helvetica, sans-serif;
+                height: 100vh;
+                border-radius: 17px;
+            }
+
+            .container {
+                background-color: white;
+                border-radius: 10px 10px 0px 0px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+                overflow: hidden;
+                width: 40%;
+                margin-top: 10%;
+                height: fit-content;
+            }
+
+            h2 {
+                margin: 20px 0;
+                text-align: center;
+            }
+
+            .items-container {
+                margin: 0 10px;
+            }
+
+            .item {
+                border: 1px solid #bbb;
+                color: #555;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px;
+                position: relative;
+                margin: 10px 0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .item:hover {
+                color: #111;
+                font-size: 102%;
+                transition: font 0.1s;
+            }
+
+            .item.selected {
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+                color: #111;
+                position: relative;
+            }
+
+            .item.selected:before {
+                background: linear-gradient(to bottom, midnightblue, midnightblue);
+                content: ' ';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 5px;
+                height: 100%;
+            }
+
+            .item span, .item small {
+                position: relative;
+                z-index: 1;
+            }
+
+            .item .percent-bar {
+                background-color: midnightblue;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                height: 100%;
+                width: 0;
+                z-index: 0;
+                opacity: 0.2;
+                transition: width 0.5s ease-in;
+            }
+
+            .btn {
+                background: linear-gradient(to right, midnightblue, midnightblue);
+                border: 0;
+                color: #fff;
+                cursor: pointer;
+                font-size: 18px;
+                padding: 20px 25px;
+                letter-spacing: 0.5px;
+                line-height: 20px;
+                width: 100%;
+                font-weight: bold;
+            }
+
+            .btn:active {
+                font-size: 16px;
+                line-height: 20px;
+            }
+
+            .btn:focus {
+                outline: none;
+            }
+            .background-cover{
+                background-image: url('{% static '/images/Opinion.jpg' %}');
+                background-size: cover;
+                background-position: center;
+                filter: blur(0px) brightness(70%);
+                float: left;
+                position: absolute;
+                left: -29%;
+                top:-10;
+                margin: 0px;
+                width: 129.65%;
+                height: 100vh;
+                z-index: -1;
+                padding-top: 2%;
+                display: flex;  
+            }
+            .background-cover2{
+                background-color: rgba(255,255,255,0.6);
+                float: left;
+                position: absolute;
+                left: -29%;
+                top:-10;
+                margin: 0px;
+                width: 129.65%;
+                height: 200px;
+                z-index: -1;
+                padding-top: 2%;
+                display: flex;  
+            }
+            .vote-image{
+                width:200px;
+                height: 200px;
+                z-index: 2;
+                margin-left: 4%;
+                opacity: 0.7;
+                border-radius: 100%;
+                border:1px solid midnightblue;
+            }
+        </style>
+        <script>
+            document.getElementsByClassName("vote")[0].classList.add("active"); 
+        </script>
+        <div class="background-cover" ></div>
+        <div class="background-cover2" >
+            <h1 style="color: midnightblue;margin-left: 25%;display: inline;margin-top: 4.5%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Your Opinion Matters ! </h1>
+            <img src="{% static 'images/user-perspective.jpg' %}" class="vote-image"/>
+        </div>
+        <div class="main-container">
+            <div class="container">
+                {% if question %}
+                <h2>{{ question|safe}}</h2>
+                {% else %}
+                <h2>No polls available right now, please checkout later !</h2>
+                {% endif %}
+                <div id="items_container" class="items-container">
+                    <h2></h2>
+                </div>
+                <button id="submit_btn" class="btn">Submit Vote</button>
+            </div>
+        </div>
+        <script src="{% static '/js/jquery-3.6.3.js' %}"></script>
+        <script>
+            const items_container = document.getElementById('items_container');
+            const submit_btn = document.getElementById('submit_btn');
+            const itemsEl = [];           
+            
+            data = {{ optionlist|safe }};
+            votes = 0;
+
+            let voted = false;
+
+            createDom();
+
+            function createDom() {
+                items_container.innerHTML = '';
+
+                data.forEach(data => {
+                    console.log(data)
+                    const item = document.createElement('div');
+                    item.classList.add('item');
+                    item.innerHTML = `
+                        <span>${data.value}</span>
+                        
+                        <small></small>
+                        <div class="percent-bar"></div>
+                    `;
+                    console.log(data.value)
+
+                    item.setAttribute('data-id', data.id);
+                    console.log(data.id)
+                    itemsEl.push(item);
+                    items_container.appendChild(item);
+                })
+
+                const items = document.querySelectorAll('.item');
+
+                items.forEach(item => {
+                    item.addEventListener('click', () => {
+                        items.forEach(innerItem => {
+                            innerItem.classList.remove('selected');
+                        });
+                        item.classList.add('selected');
+                    });
+                });
+
+                submit_btn.addEventListener('click', () => {
+                    if(!voted) {
+                        const votedItem = document.querySelector('.item.selected');
+                        if(!votedItem) {
+                            alert('Please select an option.')
+                            return;
+                        }
+                        const id = votedItem.getAttribute('data-id');
+
+
+                        data.find(item => item.id === id).votes += 1;
+                        console.log("Votes total", data.find(item => item.id === id).votes)
+
+                        calculateVotes();
+                        
+                        var formdata = new FormData();
+                        var resultjson = JSON.stringify(data);
+                        var username = "{{ request.user.username|safe }}";
+                        formdata.append('resultjson', resultjson);
+                        formdata.append('username', username);
+                        $.ajax({
+                                    type: 'POST',
+                                    url: 'updatevoting',
+                                    data: formdata,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function(json) {
+                                        console.log("Response: " + json);
+                                    }
+                        });
+
+                        submit_btn.innerText = 'Thank you for your response';
+
+                        voted = true;
+                    }else{
+                        window.alert('You have voted already !');
+                    }
+                });
+            }
+
+            function tally() {
+                data.forEach(data => {
+                    votes += data.votes 
+                });
+                return (votes)
+            }
+
+            function calculateVotes() {
+                totalVotes = tally()
+                console.log("total Votes", totalVotes)
+                const items = document.querySelectorAll('.item');
+                
+                
+                items.forEach(item => {
+                    const id = item.getAttribute('data-id');
+                    const votePercent = (data.find(data => data.id === id).votes || 0) / totalVotes * 100;
+                    const voteFinalValue = `${votePercent.toFixed(2)}%`
+                    
+                    // Add % value into the small tag
+                    item.querySelector('small').innerText = voteFinalValue;		
+                    // Make the .percent-bar x% width
+                    item.querySelector('.percent-bar').style.width = voteFinalValue;
+                });
+            }
+            {% if vote_status == True %}
+                calculateVotes();
+                submit_btn.innerText = 'You have already Submitted Your Vote';
+                voted = true;
+            {% endif %}
+        </script>
+{% endblock %}

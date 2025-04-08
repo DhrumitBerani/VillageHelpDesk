@@ -1,0 +1,357 @@
+{% extends "Talati_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Vote
+{% endblock %}
+
+{% block content %}
+        <style>
+            body {
+                background-color: #f6f6f6;
+            }
+            .main-container {
+                display: flex;
+                justify-content: center;
+                /* align-items: center; */
+                font-family:Arial, Helvetica, sans-serif;
+                height: 100vh;
+                border-radius: 17px;
+            }
+
+            .container {
+                background-color: white;
+                border-radius: 10px 10px 0px 0px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+                overflow: hidden;
+                width: 50%;
+                margin-top: 168px !important;
+                height: fit-content;
+            }
+
+            h2 {
+                margin: 20px 0;
+                text-align: center;
+            }
+
+            .items-container {
+                margin: 0 10px;
+            }
+
+            .item {
+                border: 1px solid #bbb;
+                color: #555;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px;
+                position: relative;
+                margin: 10px 0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .item:hover {
+                color: #111;
+                font-size: 102%;
+                transition: font 0.1s;
+            }
+
+            .item.selected {
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+                color: #111;
+                position: relative;
+            }
+
+            .item.selected:before {
+                background: linear-gradient(to bottom, midnightblue, midnightblue);
+                content: ' ';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 5px;
+                height: 100%;
+            }
+
+            .item span, .item small {
+                position: relative;
+                z-index: 1;
+            }
+
+            .item .percent-bar {
+                background-color: midnightblue;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                height: 100%;
+                width: 0;
+                z-index: 0;
+                opacity: 0.2;
+                transition: width 0.5s ease-in;
+            }
+
+            .btn {
+                background: linear-gradient(to right, midnightblue, midnightblue);
+                border: 0;
+                color: #fff;
+                cursor: pointer;
+                font-size: 18px;
+                padding: 20px 25px;
+                letter-spacing: 0.5px;
+                line-height: 20px;
+                width: 100%;
+                font-weight: bold;
+            }
+
+            .btn:active {
+                font-size: 16px;
+                line-height: 20px;
+            }
+
+            .btn:focus {
+                outline: none;
+            }
+            .background-cover{
+                background-image: url('{% static '/images/voting_image.avif' %}');
+                background-size: cover;
+                background-position: center;
+                filter: blur(0px) brightness(50%);
+                float: left;
+                position: absolute;
+                left: -29%;
+                top:-10;
+                margin: 0px;
+                width: 129.65%;
+                height: 100vh;
+                z-index: -1;
+                padding-top: 2%;
+                display: flex;  
+            }
+            .background-cover2{
+                background-color: rgb(25, 25, 112,0.5);
+                float: left;
+                position: absolute;
+                left: -29%;
+                top:-10;
+                margin: 0px;
+                width: 129.65%;
+                height: 200px;
+                z-index: -1;
+                padding-top: 2%;
+                display: flex;  
+            }
+            .vote-image{
+                width:200px;
+                height: 200px;
+                z-index: 2;
+                margin-left: 10%;
+                opacity: 0.7;
+                border-radius: 100%;
+                border:1px solid midnightblue;
+            }
+
+            .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        .poll-title-text{
+            font-size: 20px;
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif  ;
+        }
+
+        .poll-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .poll-title input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 0px solid black;
+            border-bottom: 1px solid midnightblue;
+            font-size: 25px;
+            outline: none;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 3%;
+        }
+
+        .poll-title input[type="text"]::placeholder {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .poll-option {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .poll-option input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .poll-option .index {
+            width: 10%;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .btn {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .options-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        #add-option{
+          background: #007BFF;
+          width: 30%;
+        }
+        #remove-option{
+          background: transparent;
+          /* color: orangered; */
+          width: 8%;
+          font-size: 20px;
+          padding: 0px;
+          margin: 0px;
+          text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+
+        #options_container{
+          counter-reset: line-number;
+        }
+        .poll-option{
+          counter-increment: line-number;
+        }
+        .poll-option:before {
+          content: counter(line-number)".";
+          margin-right: 15px;
+        }
+        </style>
+        <script>
+          document.getElementsByClassName("vote")[0].classList.add("active");
+        </script>
+        <div class="background-cover"></div>
+        <div class="background-cover2">
+            <h1 style="color: white;margin-left: 25%;display: inline;margin-top: 4.5%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Create Voting Poll </h1>
+            <img src="{% static 'images/user-perspective.jpg' %}" class="vote-image"/>
+        </div>
+        <div class="main-container">
+          <div class="container">
+            <form id="poll-form" action="/savevotingoptions" method="POST">
+                <div class="poll-title">
+                  <input type="text" name="poll-title" placeholder="Enter Poll Title" required>
+                  <br><br>
+                </div>
+                <div id="options-container">
+                    <!-- Poll options will be dynamically added here -->
+                </div>
+                <input type="hidden" name="json_options" id="json_options" value="">
+                <input type="hidden" name="village_id" id="village_id" value="{{village_id}}">
+                <div class="options-actions">
+                    <button type="button" class="btn" id="add-option">Add</button>
+                </div>
+                <br>
+                <span id="warning" style="color: red;font-size: 110%;display: none;"> Please Add Atleast 2 Options</span>
+                <br>
+                <input type="submit" class="btn" value="Save" style="width: 42%;padding: 13px ;font-size: 16px;">
+            </form>
+          </div>
+        </div>
+        <script>
+          
+            const pollOptions = [];
+
+            function addOption() {
+                const optionsContainer = document.getElementById("options-container");
+                const newOption = document.createElement("div");
+                newOption.className = "poll-option";
+                newOption.innerHTML = `
+                <input type="text" name="poll-option" placeholder="Enter an option" required>
+                <button type="button" class="btn" id="remove-option" onclick="removeOption(${optionsContainer.childElementCount});">❌</button>
+                `;
+                optionsContainer.appendChild(newOption);
+            }
+            addOption();
+            addOption();
+            addOption();
+
+            function removeOption(indexvar) {
+                const optionsContainer = document.getElementById("options-container");
+                const pollOptions = optionsContainer.getElementsByClassName("poll-option");
+                if (pollOptions.length > 1) {
+                    optionsContainer.removeChild(pollOptions[indexvar]);
+                }
+            }
+
+            document.getElementById("add-option").addEventListener("click", addOption);
+            document.getElementById("remove-option").addEventListener("click", removeOption);
+
+            const pollForm = document.getElementById("poll-form");
+            pollForm.addEventListener("submit", function(event) {
+                event.preventDefault(); 
+                pollOptions.length = 0; 
+                const pollOptionInputs = document.querySelectorAll('[name="poll-option"]');
+                pollOptionInputs.forEach(function(input, index) {
+                    pollOptions.push({
+                        id: (index + 1).toString(),
+                        value: input.value,
+                        votes: 0
+                    });
+                });
+                const outputJSON = JSON.stringify(pollOptions, null, 4);
+                document.getElementById("json_options").value = outputJSON;
+                console.log(outputJSON);
+                if(pollOptions.length < 2){
+                  document.getElementById("warning").style.display = "block";
+                }else{
+                  pollForm.submit();
+                }
+            });
+    </script>
+</body>
+{% endblock %}

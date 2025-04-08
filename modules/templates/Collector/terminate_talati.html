@@ -1,0 +1,267 @@
+{% extends "Collector_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Transfer Talati
+{% endblock %}
+
+{% block content %}
+        <style>
+            body {
+                background-color: midnightblue;
+            }
+            .main-container {
+                background-color: white;
+                font-family: Arial, Helvetica, sans-serif;
+                height: fit-content;
+                border-radius: 17px;
+                box-shadow: 1px 1px 20px rgba(255, 255, 255, 0.1);
+            }
+            .container{
+                overflow: hidden;
+                height: fit-content;
+                margin-top: 3%;
+            }
+            .background-cover2{
+                background-color: rgba(25,25,112, 0.1);
+                position: relative;
+                margin: 0px;
+                height: 200px;
+                padding-top: 2%;
+                border-radius: 17px 17px 0px 0px;
+                overflow: hidden;
+            }
+            .circle1{
+                position: absolute;
+                right: -5%;
+                top: -10%;
+                width: 230px;
+                height: 230px;
+                background-color: rgba(74, 3, 255, 0.2);
+                border-bottom-left-radius:  100%;
+                overflow: hidden;
+            }
+            .circle2{
+                position: absolute;
+                right: -5%;
+                top: 12%;
+                width: 230px;
+                height: 230px;
+                background-color: rgba(74, 3, 255, 0.2);
+                border-top-left-radius:  100%;
+                overflow: hidden;
+            }
+            .main-user-info{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                padding: 15px 0;
+            }
+            .user-input-box{
+                display: flex;
+                flex-wrap: wrap;
+                width: 40%;
+                padding-bottom: 20px;
+            }
+            .user-input-box label{
+                width: 95%;
+                color: midnightblue;
+                font-size: 20px;
+                font-weight: 800;
+                margin: 5px 0;
+            }
+            .user-input-box input{
+                height: 45px;
+                width: 95%;
+                border-radius: 7px;
+                outline: none;
+                border: 1px solid rgba(0,0,0,0.2);
+                padding: 0 10px;
+            }
+            .form-submit-btn{
+                margin-top: 40px;
+            }
+            .form-submit-btn input {
+                display: block;
+                width: 250px;
+                height: 55px;
+                font-size: 22px;
+                font-family: "Helvetica Neue", 'Courier New', monospace;
+                color: #fff;
+                background: rgba(25, 25, 112, 1);
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+                margin: 0 auto;
+            }
+            .form-submit-btn input:hover {
+                background: rgba(157, 157, 213, 0.4);
+            }
+            .form-submit-btn input:active {
+            transform: scale(1.05);
+            }
+            .form-submit-btn input:hover{
+                background: white;
+                color: rgba(25, 25, 112, 1);
+                border: 1px solid rgba(25, 25, 112, 0.4);
+            }
+            .payment-btn input{
+                background-color: midnightblue;
+                margin-left: 0px;
+                margin-right: 0px;
+            }
+            .payment-btn{
+                display: flex;
+                margin: none;
+                align-items: flex-end;
+                justify-content: flex-end;
+                width: 90%;
+            }
+            select{
+                width: 95%;
+                padding: 13px;
+                background-color: white;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                font-size: 14px;
+            }
+            .payment_details{
+                flex: 0 0 100%;
+                margin-left: 10%;
+                margin-top: 4%;
+            }
+            .labels{
+                font-size: 20px;
+                font-weight: bold;
+                display: inline-flex;
+                width: 16%;
+                padding: 20px;
+                border-left: 5px solid black;
+                margin-top: 0.5%;
+                background-color: #e7e6e6;
+            }
+            .values{
+                font-size: 18px;
+                padding: 20px;
+            }
+            .razorpay-backdrop span{
+                display: none;
+            }
+            .pagination {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .pagination a {
+                text-decoration: none;
+            }
+            .pagination-number {
+                padding: 12px 17px;
+                border-radius: 2px;
+                color: #fff;
+                background-color: midnightblue;
+            }
+            .pagination-number:hover,
+            .pagination-current {
+                background-color: midnightblue;
+            }
+            .pagination-action {
+                margin: 0 2px;
+                color: #fff;    
+                font-size: 1em;
+                align-items: center;
+                padding: 10px 10px;
+                border-radius: 5px;
+                color: midnightblue;
+                background-color: #ffffff;
+                border: 1px solid midnightblue;
+            }
+            .pagination-action:hover,
+            .pagination-previous,
+            .pagination-next {
+                color: midnightblue;
+            }
+            section .recent-document-table{
+                background-color: white;
+                color: black;
+                border: 1px solid rgb(0,0,0,0.1);
+                border-radius: 10px;
+                margin: 40px 20px 40px 30px;
+                box-shadow: 0 0 10px rgb(0,0,0,0.1);
+            }
+            table{
+                border-collapse: collapse;
+                width: 100%;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            section .recent-document-table tr:not(:last-child){
+                border-bottom: 1px solid black;
+            }
+            table tr td,th{
+                padding: 20px;
+                text-align: center;
+            }
+            table tr:first-of-type{
+                background-color: gold;
+            }
+            .view-btn{
+                text-decoration: none;
+                padding: 10px 12px;
+                color: white;
+                background-color: midnightblue;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+            }
+        </style>
+        <div class="main-container">
+            <div class="background-cover2" >
+                <div class="circle2"></div>
+                <div class="circle1"></div>
+            <h1 style="color: midnightblue;text-align: center;margin-top: 4.5%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Terminate Talati</h1>
+            <h2 style="color: midnightblue;text-align: center;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;">Process of Termination of Talati can be done here </h2>
+        </div>
+    <div class="container">
+      <form action="/searchtalatifortermination" method="POST">
+        <div class="main-user-info">
+            <div class="user-input-box" style="width: 100%;margin: 0 auto;margin-left: 5%;">
+                <label for="ward" style="margin-bottom: 1.3%;font-size: 22px;">Select talati to terminate</label>
+            <select id="ward" name="talati_id" style="font-size: 16px;">
+                {% for talati in talati_list %}
+                    {% if talati.profile.type == "talati" %}
+                        <option value="{{talati.id}}">{{talati.first_name}} {{talati.last_name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-submit-btn">
+          <input type="submit" value="Get Details">
+        </div>
+      </form>
+      {% for talati in  searched_talati%}
+      <div class="payment_details">
+          <span class="labels">Talati Id: </span>  <span class="values">{{ talati.id }}</span><br>
+          <span class="labels">Talati Name: </span>  <span class="values">{{ talati.first_name }} {{ talati.last_name }}</span><br>
+          <span class="labels">Allocated Villages: </span>  <span class="values">{{allocated_villages}}</span><br>
+          <form action="/terminate_talati_process" method="post">
+            <input type="hidden" value="{{talati.id}}" name="talati_id">
+            <div class="form-submit-btn payment-btn">
+                <input type="submit" id="pay-btn" value="Terminate Talati">
+            </div>
+        </form>
+      </div>
+      {% endfor %}
+      
+    </div>
+</body>
+</html>
+<script>
+    document.getElementsByClassName("terminatetalati")[0].classList.add("active");
+</script>
+{% endblock %}

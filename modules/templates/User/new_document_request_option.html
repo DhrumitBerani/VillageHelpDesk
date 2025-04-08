@@ -1,0 +1,45 @@
+{% extends "User_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Document Requests
+{% endblock %}
+
+{% block content %}
+<script>
+    document.getElementsByClassName("newrequest")[0].classList.add("active");
+  </script>
+
+    <link rel="stylesheet" href="{% static 'styles/doc_request.css' %}">
+        <div class="main_container" style="margin-top: 5px;float: left;width: 100%;">
+            <div class="sub_container">
+                <div class="title_div">
+                    <h1>New Document Request</h1><br>
+                    <h3 style="margin-top: 0%;">Please select the document request type</h3>
+                </div>
+                {% if messages %}
+                       {% for message in messages %}
+                        <center>
+                            <div class="{{ message.tags }}" id="message" onclick="this.hidden=true">{{ message }}<span class="close">❌</span></div>
+                        </center>
+                            <script>
+                                setTimeout(()=>{
+                                    document.getElementById("message").style.display = "none";
+                                },5000);
+                            </script>
+                       {% endfor %}
+                    {% endif %}
+                <div class="container">
+                    <div class="box" id="box-1"><a href="/birthcertiform"><img src="{% static 'images/birth_cert_logo.png'%}" width="100"><span class="bottom-text-section">Birth Certificate</span></a></div>
+                    <div class="box" id="box-2"><a href="/deathcertiform"><img src="{% static 'images/death_cert_logo.png'%}" width="90"><span class="bottom-text-section">Death Certificate</span></a></div>
+                    <div class="box" id="box-3"><a href="/incomecertiform"><img src="{% static 'images/income_cert_logo.png'%}" width="90"><span class="bottom-text-section">Income Certificate</span></a></div>
+                    <div class="box" id="box-4"><a href="/castcertiform"><img src="{% static 'images/cast_cert_logo.png'%}" width="90"><span class="bottom-text-section">Caste Certificate</span></a></div>
+                    <div class="box" id="box-5"><a href="/charactercertiform"><img src="{% static 'images/character_cert_logo.png'%}" width="90"><span class="bottom-text-section">Character Certificate</span></a></div>
+                    <div class="box" id="box-6"><a href="/nclcertiform"><img src="{% static 'images/ncl_cert_logo.png'%}" width="90"><span class="bottom-text-section">NCL Certificate</span></a></div>
+                    <div class="box" id="box-7"><a href="/landcertiform"><img src="{% static 'images/land_cert_logo.png'%}" width="90"><span class="bottom-text-section">Land Ownership Certificate</span></a></div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

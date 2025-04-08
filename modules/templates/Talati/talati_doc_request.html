@@ -1,0 +1,112 @@
+{% extends "Talati_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Dashboard
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'styles/user_dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'styles/talati_doc_request.css' %}">
+
+<script>
+    document.getElementsByClassName("newrequest")[0].classList.add("active");
+  </script>
+
+<div class="main-content">
+    <div class="bubble1"></div>
+    <div class="bubble2"></div>
+  </div>
+  <div class="hero-line">
+    <i class="fa fa-home"></i> / Document Requests<br>
+  </div>
+
+  <div class="main-container">
+    <a href="/birth_table" style="text-decoration: none; color: rgb(89, 89, 89);">
+    <div class="box">
+      <div class="box-content">
+        <h3>Birth Certificate</h3>
+        <h1>{{Birth_Certificate}}</h1>
+        <p>requests are waiting</p>
+        <div class="icon-circle" style="background-image: linear-gradient(310deg, #030b58, #0418cc);">
+          <i class="fa  fa-child"></i>
+        </div>
+      </div>
+    </div>
+  </a>
+
+<a href="/death_table" style="text-decoration: none; color: rgb(89, 89, 89);">    
+    <div class="box">
+      <div class="box-content">
+        <h3>Death Certificate</h3>
+        <h1>{{Death_Certificate}}</h1>
+        <p>requests are waiting</p>
+        <div class="icon-circle" style="background-image: linear-gradient(310deg, #4b4848, #928f8f);">
+          <i class="fa  fa-bed"></i>
+        </div>
+      </div>
+    </div>
+</a>
+<a href="/cast_table" style="text-decoration: none; color: rgb(89, 89, 89);">
+    <div class="box">
+      <div class="box-content">
+        <h3>Cast Certificate</h3>
+        <h1>{{cast}}</h1>
+        <p>requests are waiting</p>
+        <div class="icon-circle" style="background-image: linear-gradient(310deg, #f5365c, #f67e5d);">
+          <i class="fa  fa-users"></i>
+        </div>
+      </div>
+    </div>
+</a>
+<a href="/income_table" style="text-decoration: none; color: rgb(89, 89, 89);">
+    <div class="box">
+      <div class="box-content">
+        <h3>Income Certificate</h3>
+        <h1>{{Income_Certificate}}</h1>
+        <p>requests are waiting</p>
+        <div class="icon-circle" style="background-image: linear-gradient(310deg, #055502, #0aa804);">
+          <i class="fa  fa-money"></i>
+        </div>
+      </div>
+    </div>
+</a>
+<a href="/land_table" style="text-decoration: none; color: rgb(89, 89, 89);">
+    <div class="box">
+      <div class="box-content">
+        <h3>Land Ownership</h3>
+        <h1>{{Land_Ownership_Certificate}}</h1>
+        <p>requests are waiting</p>
+        <div class="icon-circle" style="background-image: linear-gradient(310deg, #9e4802, #f8b420);">
+          <i class="fa  fa-map-marker"></i>
+        </div>
+      </div>
+    </div>
+</a>
+<a href="/cryamy_table" style="text-decoration: none; color: rgb(89, 89, 89);">
+    <div class="box">
+      <div class="box-content">
+        <h3>Non-Cryamy Layer</h3>
+        <h1>{{NonCreamy_Certificate}}</h1>
+        <p>requests are waiting</p>
+        <div class="icon-circle" style="background-image: linear-gradient(310deg, #70018b, #9f05c5);">
+          <i class="fa  fa-user-circle-o"></i>
+      </div>
+    </div>
+  </div></a>
+  <a href="/character_table" style="text-decoration: none; color: rgb(89, 89, 89);">
+    <div class="box">
+      <div class="box-content">
+        <h3>Character Certificate</h3>
+        <h1>{{ character_Certificate }}</h1>
+        <p>requests are waiting</p>
+        <div class="icon-circle" style="background-image: linear-gradient(310deg, #016e4f, #03d297);">
+          <i class="fa  fa-user-circle-o"></i>
+      </div>
+    </div>
+  </div></a>
+  
+{% endblock %}

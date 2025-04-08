@@ -1,0 +1,66 @@
+{% extends "Talati_dashboard_master_template.html" %}
+{% load static %}
+{% block title %}
+Dashboard
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/user_dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'styles/talati_doc_request.css' %}">
+<style>
+   .view_button {
+    background-color: blue;
+    color: white;
+    border: none;
+    margin-top: 20%;
+    padding: 10px 15px;
+    border-radius: 10%;
+    font-size: 17px;
+  }
+  .view_button:hover {
+    cursor: pointer;
+  }
+</style>
+<script>
+   document.getElementsByClassName("newrequest")[0].classList.add("active");
+</script>
+<div class="main-content">
+   <div class="bubble1"></div>
+   <div class="bubble2"></div>
+</div>
+<div class="hero-line">
+   <i class="fa fa-home"></i> / Dashboard / Death Certificates<br>
+</div>
+<section>
+   <div class="recent-document-table">
+      <table>
+         <tr>
+            <th>Sr No.</th>
+            <th>Username</th>
+            <th>Apply Date & Time</th>
+            <th>Status</th>
+            <th>Action</th>
+         </tr>
+         {% for i in death %}
+         <tr>
+            {% if i.form_status == 'Pending' %}
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.username }}</td>
+            <td>{{ i.application_date }}</td>
+            <td>{{ i.form_status }}</td>
+            <td>
+               <form action="user_death_req" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="user_profile" value="{{ i.username }}">
+                  <input type="hidden" name="inward_id" value="{{ i.inward_id }}">
+                  <button type="submit" class="view_button">View</button>
+               </form>
+         </tr>
+         {% endif %}
+         {% endfor %}
+         <tr>
+            <td colspan="4" style="text-align: center;width: 100%;"><a href="/documenthistory" style="text-decoration: none;font-size: 18px;">View all</a></td>
+         </tr>
+      </table>
+   </div>
+</section>
+{% endblock %}

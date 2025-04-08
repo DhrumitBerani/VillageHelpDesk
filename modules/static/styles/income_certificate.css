@@ -1,0 +1,154 @@
+* { 
+    /* margin: 0px; */
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    background-color: midnightblue;
+}
+
+.main_container {
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 6px;
+    height: fit-content;
+    float: left;
+    width: 99%;
+    /* background-color: red; */
+}
+
+.head_container {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: rgba(25,25,112, 0.1);
+    color: midnightblue;
+    font-family: Cambria;
+    text-align: center;
+    padding: 2%;
+    border-bottom: 1px solid rgba(0,0,0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+.circle1{
+    position: absolute;
+    right: -5%;
+    top: -12%;
+    width: 180px;
+    height: 180px;
+    background-color: rgba(74, 3, 255, 0.2);
+    border-bottom-left-radius:  100%;
+    overflow: hidden;
+    /* z-index: -1; */
+}
+.circle2{
+    position: absolute;
+    right: -5%;
+    top: 10%;
+    width: 180px;
+    height: 180px;
+    background-color: rgba(74, 3, 255, 0.2);
+    border-top-left-radius:  100%;
+    overflow: hidden;
+}
+.sub_container {
+    /* border: 2px solid red; */
+    height: 80%;
+    padding: 3% 3% 3% 3%;
+    margin: 2% 0% 0% 0%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.box {
+    /* border: 2px solid blue; */
+}
+
+/* Copy Content Start */
+#name_input,select {
+    display: block;
+    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: 0.25rem;
+    width: 90%;
+    background-color: white;
+    border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#name_lable {
+    display: block;
+    /* background-color: wheat; */
+    text-align: left;
+    color: midnightblue;
+    font-weight: bold;
+}
+.gender_input_div {
+    /* border: 2px solid black; */
+    width: 90%;
+    display: flex;
+    border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+    /* border: 2px solid black; */
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+}
+.gender_input_div label{
+    padding-top: 7px;
+    padding-left: 2px;
+    font-size: 18px;
+}
+
+.gender_input_div:hover {
+    border: 1px solid #ccc;
+}
+
+
+.birth_box {
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1 / 4;
+}
+
+#save {
+    background-color: blue;
+    text-align: center;
+    /* border: 2px solid red; */
+    border-radius: 5px;
+    color: white;
+    height: 45px;
+    width: 10%;
+    font-size: 1.3rem;
+    padding: 1%;
+    text-decoration: none;  
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+    margin-bottom: 20px;
+}
+
+#save:hover {
+    background-color: #0c097a;
+}
+
+/* Copy Content Ends */
+input[type="submit"]{  
+    background-color: midnightblue;
+    outline: none;
+    border-radius: 7px;
+    color: white;
+    width: 10%;
+    font-size: 1.3rem;
+    padding: 15px 25px 10px 25px;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 3vh;
+    margin: 0% auto;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: rgb(36, 36, 165);
+}

@@ -1,0 +1,121 @@
+{% extends "Talati_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Document Requests
+{% endblock %}
+
+{% block content %}
+<script>
+    document.getElementsByClassName("vote")[0].classList.add("active");
+    var inputString = "{{request.user.profile.allocated_villages}}";
+    var elementsArray = inputString.replace(/[()']/g, '').split(', ');
+    var mySet = new Set(elementsArray);
+    var numberToCheck = 0;
+  </script>
+
+    <link rel="stylesheet" href="{% static 'styles/managevoting.css' %}">
+            <div class="sub_container">
+                <div class="title_div">
+                    <h1>Manage Voting</h1><br>
+                    <h3 style="margin-top: 0%;">Add / Delete or Declare result of ongoing Voting Polls</h3>
+                    
+
+
+                </div>
+                    {% if messages %}
+                       {% for message in messages %}
+                        <center>
+                            <div class="{{ message.tags }}" id="message" onclick="this.hidden=true">{{ message }}<span class="close">❌</span></div>
+                        </center>
+                            <script>
+                                setTimeout(()=>{
+                                    document.getElementById("message").style.display = "none";
+                                },5000);
+                            </script>
+                       {% endfor %}
+                    {% endif %}
+                <div class="container">
+                    
+                    {% for filled in filled_list %}
+                            <div class="box-container">
+                                <div class="insider">
+                                    <div class="ring-container">
+                                        <div class="ringring"></div>
+                                        <div class="circle"></div>
+                                    </div>
+                                    <h2>Active</h2>
+                                    {% for village in villages %}
+                                        {% if village.VillageId == filled %}
+                                            <h1>{{village.village_name}}</h1>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <span class="completion" id="countfield">( 
+                                        <!-- 56%  -->
+                                        <script>
+                                            {% for vote in votelist %}
+                                                {% if vote.village_id == filled %}
+                                                    var inputString = "{{vote.voted_user_list}}";
+                                                    var vote_id = "{{vote.vote_id}}";
+                                                {% endif %}
+                                            {% endfor %}
+                                            var elementsArray = inputString.replace(/[()']/g, '').split(', ');
+                                            var mySet = new Set(elementsArray);
+                                            var count = mySet.size - 1;
+                                            var total = 0;
+                                            {% for user in userlist %}
+                                                {% for vote in votelist %}
+                                                    {% if user.profile.village_id == vote.village_id %}
+                                                        total++;
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endfor%}
+                                            // document.write(count + " " + total + " ");
+                                            document.write(((count*100)/total).toFixed(0) + "%");
+                                        </script>
+                                        Voting Completed)</span>
+                                </div>
+                                    <script>
+                                        var deleteurl= "/deletevoting/{{filled}}/" + vote_id;
+                                        var declareurl= "/declareresult/{{filled}}/" + vote_id;
+                                    </script>
+                                    <button class="delete-btn" onclick=deletevt({{filled}},{% for vote in votelist %}{% if vote.village_id == filled and vote.status == "Pending" %}{{vote.vote_id}}{% endif %}{% endfor %})><i class="fa fa-trash"></i> Delete</button>
+                                    <button style="margin-left: 20px;" onclick=declareresult({{filled}},{% for vote in votelist %}{% if vote.village_id == filled and vote.status == "Pending" %}{{vote.vote_id}}{% endif %}{% endfor %})><i class="fa fa-bullhorn"></i> Declare Result</button>
+                                </div>
+                    {% endfor %}
+                    
+                    
+                    {% for empty in empty_list %}
+                            <div class="box-container box-blank">
+                                <div class="insider blank">
+                                    <div class="ring-container">
+                                        <div class="ringring red-ringring"></div>
+                                        <div class="circle red-circle"></div>
+                                    </div>
+                                    {% for village in villages %}
+                                    {% if village.VillageId == empty %}
+                                        <h2>Inactive</h2>
+                                        <h1>{{village.village_name}}</h1>
+                                            <span class="completion">(No Polls Available)</span>
+                                        </div>
+                                        <button class="add-btn" onclick="window.location.href='/addvoting/{{village.VillageId}}'" > + Add Poll </button>
+                                        {% endif %}
+                                    {% endfor %} 
+                            </div>
+                {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+        <script>
+            function deletevt(villageid,voteid){
+                window.location.href="/deletevoting/" + villageid + "/" + voteid;
+            }
+
+            function declareresult(villageid,voteid){
+                window.location.href="/declareresult/" + villageid + "/" + voteid;
+            }
+        </script>
+{% endblock %}

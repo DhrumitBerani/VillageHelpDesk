@@ -1,0 +1,182 @@
+{% load static %}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta charset="utf-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <title>PDF Data</title>
+        <style>
+            @font-face {
+                font-family: "Noto Sans Gujarati";
+                src: url('{{ fontlink }}');
+            }
+            *,html,body{
+                font-family: 'Noto Sans Gujarati';
+            }
+            body{
+                border: 3px solid black;
+            }
+            table,tr,td{
+                font-size: 18px;
+            }
+            img{
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h4 style="padding: 50px 0px 0px 0px;text-align: right;margin-right:65px;">અરજી ક્રમાંક: {{ rdata.inward_id}}</h4>
+        <h4 style="padding: 0px;margin: 30px 0px 0px 0px;text-align: left;position: absolute;left: 690;">પ્રમાણપત્ર ક્રમાંક: {{ rdata.form_id }}/{{ rdata.approval_date|date:'Y'}}</h4>
+        <h4 style="padding: 0px;margin: 60px 0px 0px 0px;text-align: left;position: absolute;left: 690;">ગ્રામ પંચાયત: {{ rdata.village}}</h4>
+        <h4 style="padding: 0px;margin: 90px 0px 0px 0px;text-align: left;position: absolute;left: 690;">{{ rdata.district }}</h4>
+        <h4 style="padding: 0px;margin: 120px 0px 0px 0px;text-align: left;position: absolute;left: 690;">તારીખ: {{ rdata.approval_date|date:'d/m/Y'}}</h4>
+        <img id="barcode" src="file://{{ barcodelink }}" alt="barcode" style="width: 240px;height: 40px;position: absolute;right: 73;top: 83;object-fit:cover;"/>
+        <img id="nationalsymbol" src="file://{{ imglink }}" alt="nationalsymbol" style="width:70px;height:100px;position: absolute;left: 480;top: 20;object-fit:fill;">
+        <img id="userphoto" src="file://{{ userphoto }}" alt="user_photo" style="width:100px;height:100px;position: absolute;left: 60;top: 60;object-fit:fill;">
+        <h1 style="text-align: center;margin-top: 170px;margin-bottom:0%;font-size:30px;text-shadow: 1px 0 0 black;">ગુજરાત સરકાર</h1>
+        <h1 style="text-align: center;margin-bottom:0.7%;font-size:20px;text-shadow: 1px 0 0 black;">પરિશિષ્ટ-2</h1>
+        <b><u><h1 style="text-align: center;font-size:25px;margin-top:0%;text-shadow: 1px 0 0 black;"> સામાજિક અને શૈક્ષણિક રીતે પછાત વર્ગો માટેનું જાતિ પ્રમાણપત્ર </h1></u></b>
+        <h1 style="text-align: center;font-size:15px;margin-top:0%;text-shadow: 1px 0 0 black;"> ( ફક્ત ગુજરાત સરકાર હેઠળના લાભો માટે ) </h1>
+        <pre style="margin-top: 5px;"> </pre>
+            <table>
+                <tr>
+                    <td style="width: 400px;text-align: right;"><pre style="display: inline;">          </pre>આથી પ્રમાણપત્ર આપવામા આવે છે કે, </td>
+                    <td style="border-bottom: 1px solid black;text-align: center;width: 56.5%;text-shadow: 1px 0 0 black;">{{ rdata.fullname }}</td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="width: 20px;">શ્રી </td>
+                    <td style="border-bottom: 1px solid black;width: 600px;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.parent_name }}</td>
+                    <td style="width: 20px;text-align: center;">ના</td>
+                    <td style="border-bottom: 1px solid black;width: 150px;text-align: center;text-shadow: 1px 0 0 black;">{% if gender == 'Male' %}પુત્ર{% else %}પુત્રી{%endif%}</td>
+                    <td> છે. તેઓ </td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="border-bottom: 1px solid black;width: 530px;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.village }}</td>
+                    <td style="width: 90px;text-align: center;"> ગામ / નગર </td>
+                    <td style="border-bottom: 1px solid black;width: 235px;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.village }}</td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="width: 50px;">તાલુકો </td>
+                    <td style="border-bottom: 1px solid black;width: 330px;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.taluka }}</td>
+                    <td style="width: 70px;text-align: center;"> જીલ્લો </td>
+                    <td style="border-bottom: 1px solid black;width: 260px;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.district }}</td>
+                    <td style="width: 140px;text-align: center;"> ના રહીશ છે. તેઓ </td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td> ગુજરાત સરકારના મજૂર, સમાજ કલ્યાણ અને આદિજાતિ વિકાસ વિભાગનાં તા.૧-૪-૧૯૭૮ ના ઠરાવ ક્રમાંક :&emsp; બીસીઆર / ૧૦૭૮ / </td>
+                    <!-- <td> ગુજરાત સરકારના મજૂર, સમાજ કલ્યાણ અને આદિજાતિ વિકાસ વિભાગનાં તા.૧-૪-૧૯૭૮ ના ઠરાવ ક્રમાંક : બીસીઆર / ૧૦૭૮ / ૧૩૭૩૪ / હ, તેમજ ત્યારબાદના વખતો વખત બહાર પાડવામાં આવેલ સુધારાથી સામાજિક અને શૈક્ષણિક રીતે પછાત વર્ગ તરીકે જાહેર કરેલ જાતિઓ / વર્ગો / સમૂહો પૈકી</td> -->
+                    <!-- <td style="border-bottom: 1px solid black;width: 383px;text-align: center;text-shadow: 1px 0 0 black;">{{ total_income }}</td> -->
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td> ૧૩૭૩૪ / હ,&emsp; તેમજ ત્યારબાદના વખતો વખત બહાર પાડવામાં આવેલ સુધારાથી સામાજિક અને શૈક્ષણિક રીતે પછાત વર્ગ &emsp;તરીકે </td>
+                </tr>   
+                <div class="line-1" style="display: flex;">
+                        <td> જાહેર કરેલ જાતિઓ / વર્ગો / સમૂહો પૈકી <p style="display: inline; border-bottom: 1px solid black; margin-left: 10px;text-shadow: 1px 0 0 black;">{{ rdata.subcast }} સમાજ </p><p style="display: inline;">જાતિના છે.</p></td>
+                </div>
+                
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <!-- <td>પુરા છે. જેની વિગત નીચે મુજબ છે.</td> -->
+                </tr>
+            </table>
+            <!-- <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="width: 280px;">1. અરજદારની પોતાની આવક</td>
+                    <td style="border-bottom: 1px solid black;width: 250px;text-align: right;">{{ own_income }}</td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="width: 280px;">2. અરજદારના માતા-પિતાની આવક</td>
+                    <td style="border-bottom: 1px solid black;width: 250px;text-align: right;">{{ parent_income }}</td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="width: 280px;">3. કુટુંબના અન્ય સભ્યોની આવક</td>
+                    <td style="border-bottom: 1px solid black;width: 250px;text-align: right;">{{ other_income }}</td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="width: 280px;box-sizing: border-box;padding-right: 50px;text-align: right;">કુલ વાર્ષિક આવક</td>
+                    <td style="border-bottom: 1px solid black;width: 250px;text-align: right;">{{ total_income }}</td>
+                </tr>
+            </table> -->
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="border-bottom: 1px solid black;text-shadow: 1px 0 0 black;">સદર પ્રમાણપત્ર નીચે મુજબના પુરાવાઓ ના આધારે આપવામા આવેલ છે.</td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td>1. રેશન કાર્ડ<pre style="display: inline;margin-left: 300px;"></pre>2.તલાટીનો દાખલો</td>
+                    <tr>
+
+                        <td>3. શાળા છોડ્યાનું પ્રમાણપત્ર<pre style="display: inline;margin-left: 200px;"></pre>4. લાઇટ બીલની નકલ</td>
+                    </tr>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td>3. આધારકાર્ડની નકલ<pre style="display: inline;margin-left: 240px;"></pre>5. પિતા/ભાઈ/બહેનનું શાળા છોડ્યાનું પ્રમાણપત્રની ખરી નકલ</td>
+                </tr>
+            </table>
+            <!-- <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="text-shadow: 1px 0 0 black;">શરતો:-</td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="text-shadow: 1px 0 0 black;">(1) આ પ્રમાણપત્ર ઇસ્યુ થયાના નાણાકીય વર્ષ સહિત ત્રણ વર્ષ માટે ગ્રાહ્ય રહેશે. </td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="text-shadow: 1px 0 0 black;">(2) ત્રણ વર્ષના ગાળા દરમ્યાન સંબંધીત કુટુંબની આવકમા કોઈપણ સ્વરૂપે થયેલો વધારો જાહેર કરવાની જવાબદારી</td>
+                </tr>
+            </table>
+            <table style="margin: 4px 0px 0px 60px;">
+                <tr>
+                    <td style="text-shadow: 1px 0 0 black;">સંબંધીત અરજદાર / કુટુંબની રહેશે.</td>
+                </tr>
+            </table> -->
+            <table style="margin: 140px 0px 0px 100px;">
+                <tr>
+                    <td style="text-shadow: 1px 0 0 black;font-size: 26px;">કચેરીની મહોર</td>
+                </tr>
+            </table>
+            <table style="position: absolute;right: 150px;bottom: 190px;">
+                <tr>
+                    <td style="text-shadow: 1px 0 0 black;font-size: 26px;">Talati cum Mantri</td>
+                </tr>
+            </table>
+            <table style="position: absolute;right: 60px;bottom: 160px;">
+                <tr>
+                    <td style="text-shadow: 1px 0 0 black;font-size: 20px;width:400px;text-align: center;">ગ્રામ પંચાયત {{ rdata.village }}</td>
+                </tr>
+            </table>
+            <table style="position: absolute;bottom: 10px;border-top: 2px solid black;width: 98%;">
+                <tr style="border-top: 1px solid black;">
+                    <td style="text-shadow: 1px 0 0 black;font-size: 20px;text-align: left;">Courtesy :: National Information Gujarat</td>
+                    <td style="text-shadow: 1px 0 0 black;font-size: 20px;width: 30%;text-align: right;padding-right: 10px;">Digital Gujarat</td>
+                </tr>
+            </table>            
+        <!-- <img src="https://barcode.orcascan.com/?type=code128&data=17024000000012297" alt="W3Schools.com" style="width:170px;height:30px;"> -->
+    </body>
+</html>

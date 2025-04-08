@@ -1,0 +1,128 @@
+{% extends "User_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Document Requests
+{% endblock %}
+
+{% block content %}
+
+<script src="{% static 'js/jquery-3.6.3.js' %}"></script>
+<style>
+   #name_lable {
+    display: block;
+    /* background-color: wheat; */
+    text-align: left;
+    color: midnightblue;
+    font-weight: bold;
+}
+.title_div {
+    border-bottom: 2px solid black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+    color: midnightblue;
+    /* background-color: #c5c5c5; */
+}
+.main-container{
+    float: left;
+    margin-top: 40px;
+}
+</style>
+<script>
+    document.getElementsByClassName("newrequest")[0].classList.add("active");
+    function check_address_field(){
+        let address = document.getElementById("address");
+        let checkbox = document.getElementById("check");
+            if (checkbox.checked) {
+                address.value = "{{ request.user.profile.address }}";
+            } else {
+                address.value = "";
+            }
+    }
+  </script>
+
+    <link rel="stylesheet" href="{% static 'styles/doc_request.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/birth_certificate.css' %}">
+        <div class="main_container" style="margin-top: 5px;float: left;width: 100%;">
+            <div class="sub_container">
+                <div class="title_div">
+                    <h1>Birth Certificate Application</h1>
+                    <h3>Please Fill the Details</h3>
+                </div>
+                <form action="/submitapplication" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="birth_container">
+
+                        <div class="birth_box" id="birth_box-1">
+                            <label for="name" id="name_lable">Name</label>
+                            <input type="text" id="name_input" name="fullname" placeholder="Baby's Name"/>
+                        </div>
+
+                        <input type="hidden" name="form_type" value="birth_certificate_form">
+
+                        <div class="birth_box" id="birth_box-2">
+                            <label for="name" id="name_lable">Gender</label>
+                            
+                            <div class="gender_input_div">
+
+                            <input type="radio" name="gender" value="male" id="gender1" />
+                            <label for="male">Male</label>
+
+                            <input type="radio" name="gender" value="female" id="gender2" />
+                            <label for="female">Female</label> 
+                            </div>
+                        </div>
+
+                        <div class="birth_box" id="birth_box-14">
+                            <label for="name" id="name_lable">Photo</label>
+                            <input type="file" id="name_input" name="photo" style="font-size: .7rem;"/>
+                        </div>
+                        
+                        <div class="birth_box" id="birth_box-3">
+                            <label for="name" id="name_lable">Date of Birth</label>
+                            <input type="date" name="birth_date" id="name_input"/>
+                        </div>
+
+                        <div class="birth_box" id="birth_box-9">
+                            <label for="name" id="name_lable">Register Date</label>
+                            <input type="date" name="registration_date" id="name_input"/>
+                        </div>
+                        
+                        <div class="birth_box" id="birth_box-4">
+                            <label for="name" id="name_lable">Birth Place</label>
+                            <input type="text" id="name_input" name="birth_place" placeholder="Place of Birth"/>
+                        </div>
+                        
+                        <div class="birth_box" id="birth_box-5">
+                            <label for="name" id="name_lable">Father's Name</label>
+                            <input type="text" id="name_input" name="father_name" placeholder="Baby's Father"/>
+                        </div>
+                        
+                        <div class="birth_box" id="birth_box-6">
+                            <label for="name" id="name_lable">Mother's Name</label>
+                            <input type="text" id="name_input" name="mother_name" placeholder="Baby's Mother"/>
+                        </div>
+                        
+                        <div class="birth_box" id="birth_box-7">
+                            <label for="name" id="name_lable">Parent Address</label>
+                            <input type="text" id="address" name="address" placeholder="Ex. Bhadravadi"/>
+
+                            <div class="check_address">
+                                <input type="checkbox" id="check" onclick="check_address_field()">
+                                <label for="checkbox" id="check_address"> Same as Default Address</label>
+                            </div>
+                            </div>
+                        <div class="birth_box" id="birth_box-10">
+                            <label for="name" id="name_lable">Baby's Weight</label>
+                            <input type="text" id="name_input" name="weight" placeholder="EX. 2.3 kgs"/>
+                        </div>
+                </div>
+
+                <div class="birth_box submit-area" id="birth_box-15">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "Collector_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Dashboard
+{% endblock %}
+
+{% block content %}
+
+  <!-- link css file to current page -->
+  <link rel="stylesheet" href="{% static 'styles/user_dashboard.css' %}">
+
+  <!-- highlight current page in dashboard -->
+  <script>
+    document.getElementsByClassName("dashboard")[0].classList.add("active");
+  </script>
+
+<div class="main-content">
+    <div class="bubble1"></div>
+    <div class="bubble2"></div>
+  </div>
+  <!-- <div class="notification-icon" style="cursor:pointer;position: absolute;right: -10;top: 30px;background-color: white;float: right;border-top-left-radius: 100%;;border-bottom-left-radius: 100%;width: 50px;height: 50px;display: flex;justify-content: center;align-items: center;">
+    <i class="fa fa-bell" style="color: white;font-size: 20px;float: right;color: black;"></i>
+  </div> -->
+  <div class="hero-line">
+    <i class="fa fa-home"></i> / Dashboard<br>
+    <h2>Dashboard</h2>
+    
+      {% if user.is_authenticated %}
+        <h4 style="display: inline;">Current User :</h4> {{ request.user.first_name }} {{ request.user.last_name }} 
+      {% else %}
+        <h4 style="display: inline;">User :</h4> Guest
+      {% endif %}
+    
+  </div>
+  <section class="calculation-container">
+    <div class="calculation-box">
+      <h3>Available Talati</h3>
+      <h1 style="font-size: 40px;margin-left: 0px;margin-bottom: 15px;margin-top: 10px;">{{ available_talati }}</h1>
+      <span>requests are awaiting</span>
+      <div class="icon-circle" style="background-image: linear-gradient(310deg, #1171ef, #11cdef);">
+        <i class="fa fa-hourglass-end"></i>
+      </div>
+    </div>
+    <div class="calculation-box">
+      <h3>Village Count</h3>
+      <h1 style="font-size: 40px;margin-left: 0px;margin-bottom: 15px;margin-top: 10px;">{{ villagecount }}</h1>
+      <span>are waiting to resolve</span>
+      <div class="icon-circle" style="background-image: linear-gradient(310deg, #f5365c, #f67e5d);">
+        <i class="fa fa-exclamation"></i>
+      </div>
+    </div>
+    <div class="calculation-box" style="margin-right: 10px;">
+      <h3>Active Voting</h3>
+      <h1 style="font-size: 40px;margin-left: 0px;margin-bottom: 25px;margin-top: 10px;">{{ active_voting }}</h1>
+      <span>are still open to villagers</span>
+      <div class="icon-circle" style="background-image: linear-gradient(310deg, #fb6340, #fbb140);">
+        <i class="fa fa-credit-card"></i>
+      </div>
+    </div>
+  </section>
+  <h2 style="color: rgb(147, 147, 147);font-size: 30px;margin: 30px 0px 0px 30px;">Current Talati List</h2>
+  <section>
+    <div class="recent-document-table">
+      <table>
+        <tr>
+          <th>Sr No.</th>  
+          <th>Fullname</th>
+          <th>Gender</th>
+          <th>Address</th>
+          <th>Last Login Date</th>
+          <th>Last Login Time</th>
+        </tr>
+        {% for talati in talati_list %}
+        <tr>
+          <td style="width: 10%;">{{ forloop.counter }}.</td>
+          <td style="width: 30%;">{{ talati.user.first_name }} {{ talati.user.last_name }}</td>
+          <td style="width: 10%;">{{ talati.gender }}</td>
+          <td>{{ talati.address }}</td>
+          <td>{{ talati.user.last_login|date:"d/m/Y" }}</td>
+          <td>{{ talati.user.last_login|time:"h:i a" }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td colspan="6" style="text-align: center;width: 100%;"><a href="/viewtalatilist" style="text-decoration: none;font-size: 18px;">View all</a></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+{% endblock %}

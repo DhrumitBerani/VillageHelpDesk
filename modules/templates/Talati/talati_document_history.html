@@ -1,0 +1,254 @@
+{% extends "Talati_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Dashboard
+{% endblock %}
+
+{% block content %}
+  <script>
+    document.getElementsByClassName("records")[0].classList.add("active");
+  </script>
+  <style>
+    body {
+        background-color: midnightblue;
+    }
+    .main-container {
+        font-family: 'Muli';
+        height: fit-content;
+        border-radius: 17px;
+        box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
+        padding-bottom: 10px;
+        float: left;
+        background-color: white;
+        width: 99.6%;
+        margin-top: 5px;
+        /* overflow: scroll; */
+    }
+    .background-cover{
+        background-image: url('{% static '/images/Opinion.jpeg' %}');
+        background-size: cover;
+        background-position: center;
+        filter: blur(0px) brightness(85%);
+        margin: 0px;
+        height: 100vh;
+        z-index: -1;
+        padding-top: 2%;
+        display: flex;  
+    }
+    .background-cover2{
+        /* background-image: url('{% static 'images/complaint.png' %}'); */
+        background-color: aliceblue;
+        background-repeat: no-repeat;
+        /* background-attachment: fixed; */
+        background-position: left top; 
+        background-size: cover;
+        /* background-color: rgba(255,255,255,1); */
+        position: relative;
+        margin: 0px;
+        height: 200px;
+        z-index: -1;
+        padding-top: 2%;
+        border-radius: 17px 17px 0px 0px;
+        overflow: hidden;
+        /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+    }
+    .circle1{
+        position: absolute;
+        right: -5%;
+        top: -10%;
+        width: 230px;
+        height: 230px;
+        /* filter: blur(10px); */
+        background-color: rgba(74, 3, 255, 0.2);
+        border-bottom-left-radius:  100%;
+        /* border-top-left-radius:  100%; */
+        overflow: hidden;
+        z-index: -1;
+    }
+    .circle2{
+        position: absolute;
+        right: -5%;
+        top: 12%;
+        width: 230px;
+        height: 230px;
+        /* filter: blur(60px); */
+        background-color: rgba(74, 3, 255, 0.2);
+        border-top-left-radius:  100%;
+        overflow: hidden;
+    }
+    .container{
+        padding: 50px;
+    }
+    .form-head{
+        display: inline-block;
+        font-size: 2.7vh;
+        width: 17%;
+        padding: 10px 4px;
+        font-family: sans-serif;
+        color: midnightblue;
+        border-left: 5px solid midnightblue;
+        margin-top: 1.5%;
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+    .complaint-data{
+        font-size: 2.6vh;
+        padding: 10px 20px;
+    }
+    .view-btn{
+        text-decoration: none;
+        padding: 10px 12px;
+        color: white;
+        background-color: midnightblue;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        cursor: pointer;
+    }
+    section .recent-document-table{
+        background-color: white;
+        color: black;
+        border: 1px solid rgb(0,0,0,0.1);
+        border-radius: 10px;
+        margin: 40px 20px 40px 30px;
+        box-shadow: 0 0 10px rgb(0,0,0,0.1);
+      }
+    table{
+        border-collapse: collapse;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    section .recent-document-table tr:not(:last-child){
+        border-bottom: 1px solid black;
+    }
+    table tr td,th{
+        padding: 20px;
+        text-align: center;
+    }
+    table tr:first-of-type{
+        background-color: gold;
+        border-radius: 10px;
+    }
+    .pagination {
+                display: flex;
+                margin-top: 15px;
+                margin-left: 25px;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 25px;
+            }
+            .pagination a {
+                text-decoration: none;
+            }
+
+            .pagination-number {
+                padding: 12px 17px;
+                border-radius: 2px;
+                color: #fff;
+                background-color: midnightblue;
+            }
+
+            .pagination-number:hover,
+            .pagination-current {
+                background-color: midnightblue;
+            }
+
+            .pagination-action {
+                margin: 0 2px;
+                color: #fff;    
+                font-size: 1em;
+                align-items: center;
+                padding: 10px 10px;
+                border-radius: 5px;
+                color: midnightblue;
+                background-color: #ffffff;
+                border: 1px solid midnightblue;
+            }
+            .pagination-action:hover,
+            .pagination-previous,
+            .pagination-next {
+                color: midnightblue;
+            }
+    </style>
+  <div class="main-container">
+    <!-- <div class="background-cover2" >
+        <div class="circle2"></div>
+        <div class="circle1"></div>
+        <h1 style="color: midnightblue;text-align: center;margin-top: 3.5%;margin-left:2%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Complaint Section </h1>
+    </div> -->
+    <h2 style="color: rgb(147, 147, 147);text-align:center;font-size: 30px;margin: 30px 0px 0px 30px;">Document History</h2>
+    <section>
+      <div class="recent-document-table">
+        <table>
+          <tr>
+            <th>Sr No.</th>  
+            <th>Document Type</th>
+            <th>Application Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+          {% for item in page_obj %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+              {% if "17024" in item.inward_id %}
+                Birth Certificate
+              {% elif "18025" in item.inward_id %}
+                Cast Certificate
+              {% elif "19026" in item.inward_id %}
+                Character Certificate
+              {% elif "20027" in item.inward_id %}
+                Death Certificate
+              {% elif "21028" in item.inward_id %}
+                Income Certificate
+              {% elif "22029" in item.inward_id %}
+                Land Ownership Certificate
+              {% elif "23030" in item.inward_id %}
+                NCL Certificate
+              {% endif %}
+            </td>
+            <td>{{item.application_date|date:'d/m/Y h:m A'}}</td>
+            <td>
+              {% if "Reject" in item.form_status %}
+                Rejected
+              {% else %}
+                {{item.form_status}}
+              {% endif %}
+            </td>
+            <td>
+              {% if "Reject" not in item.form_status and "Pending" not in item.form_status %}
+                <a href='/viewpdf/{% if "17024" in item.inward_id %}birth{% elif "21028" in item.inward_id %}income{% elif "18025" in item.inward_id %}cast{% elif "23030" in item.inward_id %}ncl{% elif "20027" in item.inward_id %}death{% elif "22029" in item.inward_id %}land{% elif "19026" in item.inward_id %}character{% endif %}/{{item.inward_id}}' class="view-btn">View</a>
+              {% endif %}
+              {% if "Reject" in item.form_status %}
+                <span style="display:inline-block;color: red;width:150px;">{{item.form_status}}</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+        
+      </div>
+      <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="pagination-action">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="pagination-action">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="pagination-action">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-action">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    </section>
+  </div>
+{% endblock %}

@@ -1,0 +1,228 @@
+{% extends "Talati_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Complaint
+{% endblock %}
+
+{% block content %}
+
+        <style>
+            body {
+                background-color: midnightblue;
+            }
+            .main-container {
+                background-color: white;
+                font-family: 'Muli';
+                height: fit-content;
+                border-radius: 17px;
+                box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
+                padding-bottom: 10px;
+            }
+            .background-cover2{
+                background-color: rgba(25,25,112, 0.1);
+                position: relative;
+                margin: 0px;
+                height: 200px;
+                /* z-index: -1; */
+                padding-top: 2%;
+                border-radius: 17px 17px 0px 0px;
+                overflow: hidden;
+                /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+            }
+            .circle1{
+                position: absolute;
+                right: -5%;
+                top: -10%;
+                width: 230px;
+                height: 230px;
+                /* filter: blur(10px); */
+                background-color: rgba(74, 3, 255, 0.2);
+                border-bottom-left-radius:  100%;
+                /* border-top-left-radius:  100%; */
+                overflow: hidden;
+                /* z-index: -1; */
+            }
+            .circle2{
+                position: absolute;
+                right: -5%;
+                top: 12%;
+                width: 230px;
+                height: 230px;
+                /* filter: blur(60px); */
+                background-color: rgba(74, 3, 255, 0.2);
+                border-top-left-radius:  100%;
+                overflow: hidden;
+            }
+            .container{
+                padding: 50px;
+            }
+            .form-head{
+                display: inline-block;
+                font-size: 2.7vh;
+                width: 17%;
+                padding: 10px 4px;
+                font-family: sans-serif;
+                color: midnightblue;
+                border-left: 5px solid midnightblue;
+                margin-top: 1.5%;
+                background-color: rgba(0, 0, 0, 0.04);
+            }
+            .complaint-data{
+                font-size: 2.6vh;
+                padding: 10px 20px;
+            }
+            .view-btn{
+                text-decoration: none;
+                padding: 10px 12px;
+                color: white;
+                background-color: midnightblue;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+                font-size: 18px;
+            }
+            .responsive-container{
+                display: flex;
+            }
+            .responsive-container > *{
+                flex: 0 0 auto;
+            }
+            .responsive .form-head{
+                width: 150px;
+            }
+            .responsive-container .complaint-data{
+                width: 80%;
+                margin-top: 12px;
+            }
+            .profile_image{
+                width: 150px;
+                height: 150px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 100%;
+            }
+            .edit_button{
+                text-decoration: none;
+                padding: 17px 20px;
+                color: black;
+                background-color: gold;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+                position: absolute;
+                right: 15;
+            }
+            input{
+                height: 45px;
+                width: 40%;
+                border-radius: 7px;
+                outline: none;
+                border: 1px solid rgba(0,0,0,0.2);
+                padding: 0 9px;
+                font-size: 17px;
+            }
+            .select-section{
+                border: 1px solid rgba(0,0,0,0.2);
+                padding: 10px 20px;
+                background-color: white;
+                outline: none;
+                border-radius: 7px;
+                width: 40%;
+                font-size: 17px;
+            }
+        </style>
+        <div class="main-container">
+            <div class="background-cover2" >
+                <div class="circle2"></div>
+                <div class="circle1"></div>
+                <h1 style="color: midnightblue;text-align: center;margin-top: 3.5%;margin-left:2%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Profile Section </h1>
+                <h2 style="color: midnightblue;text-align: center;margin-top: 3.5%;margin-left:2%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> View & Edit Your Information</h2>
+            </div>
+            <div id="main">
+                <br><br>                <br>
+                <center><img src="{% static 'images/profile.png'%}" class="profile_image"></center>
+                
+                <form action="/handle_edit_talati_profile" method="POST" enctype="multipart/form-data"> 
+                <div class="container">
+                    <h1 style="color: #a4a3a3;margin: 0% 0% 2% 0%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Personal Information</h1>
+                    <span class="form-head"><b>First Name</b></span>
+                    <span class="complaint-data"><input type="text" name="firstname" value="{{ request.user.first_name }}"></span><br>
+                    
+                    <span class="form-head"><b>Last Name</b></span>
+                    <span class="complaint-data"><input type="text" name="lastname"  value="{{ request.user.last_name }}"></span><br>
+                    
+                    
+                    <span class="form-head"><b>Gender</b></span>
+                    <span class="complaint-data">
+                        <input type="radio" name="gender" value="Male" id="gender1" style="height: inherit;margin: 0;padding: 0;width: inherit;" {% if request.user.profile.gender == 'Male' %}Checked{% endif %}/> Male
+                  
+                        <input type="radio" name="gender" Value="Female" id="gender2" style="margin-left: 30px;height: inherit;margin: 0;padding: 0;width: inherit;" {% if request.user.profile.gender == 'Female' %}Checked{% endif %}/>Female<br>
+                    
+                    <h1 style="color: #a4a3a3;margin: 4% 0% 2% 0%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Contact Information</h1>
+                    <span class="form-head"><b>Mobile Number</b></span>
+                    <span class="complaint-data"><input type="text" name="mobilenumber" value="{{ request.user.profile.mobile_number }}"></span><br>
+                    
+                    <span class="form-head"><b>Email Id</b></span>
+                    <span class="complaint-data">{{ request.user.username }} <span style="color: red;">(Not Editable)</span></span><br>
+
+                    <span class="form-head"><b>Village Name</b></span>
+                  <span class="complaint-data">{{ request.user.village_name }} <span style="color: red;">(Not Editable)</span></span><br>
+
+               
+                    </span><br>
+
+               
+                    <span class="form-head"><b>Address</b></span>
+                    <span class="complaint-data"><input type="text" name="address" value="{{ request.user.profile.address }}"></span><br>
+
+    <span class="form-head"><b>Signature</b></span>
+    <span class="complaint-data">
+        <input type="file" name="signature" accept="image/*">
+        {% if user_profile.signature %}
+            <img src="{{ user_profile.signature.url }}" width="100" height="100">
+        {% endif %}
+    </span><br><br><br>
+                    
+                   
+                </div>
+                <center><input type="submit" class="view-btn" value="Save Changes" style="width:fit-content;background-color: #198754;color: white;"></center>
+                <br>
+                <center><a href="/talatidashboard" class="view-btn" >Go Back</a></center>
+                </form>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+        <script src="{% static '/js/jquery-3.6.3.js' %}"></script>
+        <script>
+            document.getElementsByClassName("profile")[0].classList.add("active");
+            
+            $(document).ready(function () {
+                $(".savebtn").click(function () {
+                    var formdata = new FormData();
+                    var title = $("#form-ttl").val();
+                    var description = $("#form-desc").val();
+                    formdata.append('querytitle', title);
+                    formdata.append('querydescription', description);
+                    $.ajax({
+                        type: 'POST',
+                        url: 'handleuserquery',
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success: function(json) {
+                            alert("Your Request has been submitted successfully");
+                            document.getElementById("complaint-form").reset();
+                            console.log("Response: " + json);
+                        }
+                    });
+                });
+            });
+        </script>
+{% endblock %}

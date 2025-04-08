@@ -1,0 +1,143 @@
+{% extends "Talati_dashboard_master_template.html" %}
+{% load static %}
+{% block title %}
+  User Cast Certificate Request
+{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'styles/user_dashboard.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/talati_doc_request.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/user_request_form.css' %}">
+<style>
+   .approve_button {
+   background-color: blue;
+   padding: 5%;
+   border: none;
+   border-radius: 5%;
+   }
+   .user_data {
+   color: black;
+   }
+</style>
+<script>
+   document.getElementsByClassName("newrequest")[0].classList.add("active");
+</script>
+<div class="main-content">
+   <div class="bubble1"></div>
+   <div class="bubble2"></div>
+</div>
+<br>
+<div class="main_form_container">
+   <div class="back_button">
+      <div class="inner_button">
+         <a href="/cast_table">
+         <button class="last_inner_button" style="margin: 5% 0% 0% 3%;"><i class="fa fa-arrow-left"></i> Back</button>
+         </a>
+      </div>
+      <div class="user_name">
+         <label for="user-name">Username: </label>
+         {{ req_info.username }}
+      </div>
+   </div>
+   <!-- ------------------------------------------------------------------------------------------------------ -->
+   <div class="user_data_container">
+      <h2 class="user_data_title">User Details</h2>
+      <div class="user_details">
+         <div class="user_data_box _1">
+            <label class="user_data_field" for="name">Name:</label>
+            <span style="margin: 0% 0% 0% 1%;" class="user_data">{{ req_info.fullname }}</span>
+         </div>
+         <div class="user_data_box _2">
+            <label class="user_data_field" for="name">Gender: </label>
+            <span style="margin: 0% 0% 0% 1%;" class="user_data">{{ req_info.gender }}</span>
+         </div>
+         <div class="user_data_box _3">
+            <label class="user_data_field" for="name">Father/Mother Name: </label>
+            <span style="margin: 0% 0% 0% 1%;" class="user_data">{{ req_info.parent_name }}</span>
+         </div>
+         <div class="user_data_box _4">
+            <label class="user_data_field" for="name">Religion: </label>
+            <span style="margin: 0% 0% 0% 1%;" class="user_data">{{ req_info.religion }}</span>
+         </div>
+         <div class="user_data_box _5">
+            <label class="user_data_field" for="name">Cast: </label>
+            <span style="margin: 0% 0% 0% 1%;" class="user_data">{{ req_info.cast }}</span>
+         </div>
+         <div class="user_data_box _6">
+            <label class="user_data_field" for="name">Sub Cast: </label>
+            <span style="margin: 0% 0% 0% 1%;" class="user_data">{{ req_info.subcast }}</span>
+         </div>
+         <div class="user_data_box _7">
+            <label class="user_data_field" for="name">District: </label>
+            <span style="margin: 0% 0% 0% 1%;" class="user_data">{{ req_info.district }}</span>
+         </div>
+         <div class="user_data_box _8">
+            <label class="user_data_field" for="name">Taluka: </label>
+            <span style="margin: 0% 0% 0% 1%;" class="user_data">{{ req_info.taluka }}</span>
+         </div>
+         <div class="user_data_box _8">
+            <label class="user_data_field" for="name">Village: </label>
+            <span style="margin: 0% 0% 0% 1%;" class="user_data">{{ req_info.village }}</span>
+         </div>
+      </div>
+      <h2 class="user_data_title">Documents</h2>
+      <div style="padding: 20px 0px;">
+         <span style="width: 20%;color: black;font-weight: bold;font-size: 20px;">
+            Photo<br>
+            <a href="{{ MEDIA_URL }}{{ photo_path }}" target="_blank">
+               <img src="{{ MEDIA_URL }}{{ photo_path }}" alt="Image" width="200" height="200">
+            </a>
+         </span>
+      </div>
+      <div style="padding: 20px 0px;">
+         <span style="width: 20%;color: black;font-weight: bold;font-size: 20px;">
+            Leaving Certificate<br>
+            <a href="{{ MEDIA_URL }}{{ leaving_certificate }}" target="_blank">
+               <img src="{{ MEDIA_URL }}{{ leaving_certificate }}" alt="Image" width="200" height="200">
+            </a>
+         </span>
+      </div>
+
+      <div style="padding: 20px 0px;">
+         <span style="width: 20%;color: black;font-weight: bold;font-size: 20px;">
+            Family LC Certificate<br>
+            <a href="{{ MEDIA_URL }}{{family_lc_certificate}}" target="_blank">
+               <img src="{{ MEDIA_URL }}{{family_lc_certificate}}" alt="Image" width="200" height="200">
+            </a>
+         </span>
+      </div>
+
+      <div style="padding: 20px 0px;">
+         <span style="width: 20%;color: black;font-weight: bold;font-size: 20px;">
+            Electricity Bill<br>
+            <a href="{{ MEDIA_URL }}{{electricity_bill}}" target="_blank">
+               <img src="{{ MEDIA_URL }}{{electricity_bill}}" alt="Image" width="200" height="200">
+            </a>
+         </span>
+      </div>
+   </div>
+   <!-- ------------------------------------------------------------------------------------------------------ -->
+   <div class="action_buttons">
+      <div class="reject">
+         <form action="reject_request" method="post">
+            {% csrf_token %}
+            <select name="reason" id="reasons">
+               <option value="None">None</option>
+               <option value="Unavailability of Documents">Unavailability of Documents</option>
+               <option value="Data Inadequate">Data Inadequate</option>
+               <option value="Others">Others</option>
+            </select>
+            <input type="hidden" name="user_doc" value="{{ req_info.inward_id }}">
+            <button type="submit" class="reject_button"><i class="fa fa-times"></i> Reject</button>
+         </form>
+      </div>
+      <div class="approve">
+         <form action="approve_request" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="user_doc" value="{{ req_info.inward_id }}">
+            <button type="submit" class="approve_button" style="background-color: green;"><i class="fa fa-check"></i> Approve</button>
+         </form>
+      </div>
+   </div>
+</div>
+{% endblock %}

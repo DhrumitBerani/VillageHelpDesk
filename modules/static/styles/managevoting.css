@@ -1,0 +1,206 @@
+
+body {
+    background-color: midnightblue;
+    /* background-color: blue; */
+}
+.main_container {
+    /* background-color: blue; */
+    background-color: midnightblue;
+    height: fit-content;
+    /* border: 2px solid; */
+    float: left;
+    width: 100%;
+}
+.route_tracker {
+    background-color: blue;
+    /* margin: 0% 0% 5.7% 0%; */
+    color: blue;
+}
+.sub_container {
+    background-color: white;
+    height: fit-content;
+    margin: 0% 0.5% 1% 0%;
+    text-align: center;
+    border-radius: 10px;    
+}
+.submit-area{
+    background-color: white;
+}
+
+/* .box_container {
+    background-color: red;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+
+.box {
+    border: 2px solid yellow;
+} */
+
+.container {
+    /* border: 2px solid blue; */
+    padding: 2%;
+    width: 96%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 30px;
+    column-gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+.box {
+    border: 2px solid #fdd370;
+    padding: 20px 0px;
+    border-radius: 10px;
+    height: 150px;
+    /* vertical-align: middle; */
+    /* padding-top: 100px; */
+    position: relative;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.1);
+}
+.box:hover {
+    background-color: #fdd370;
+    cursor: pointer;
+}
+.box a {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-decoration: none;
+    font-size: 100%;
+    color: black;
+    
+}
+.title_div {
+    background-color: rgba(25,25,112, 0.06);
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2); 
+    padding: 30px;
+    /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+}
+.bottom-text-section{
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    padding-top: 10px;
+}
+.box-container{
+    width: 350px;
+    height: 270px;
+    border-radius: 25px;
+    padding-bottom: 20px;
+    background-color: #fdd370;
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.5);
+}
+.box-blank{
+    background-color: rgb(78, 78, 78);
+}
+.insider{
+    width: 100%;
+    height: 80%;
+    border-radius: 20px;
+    background-color: rgb(0, 57, 126);
+    border-bottom: 1px solid midnightblue;
+    position: relative;
+    color: white;
+}
+.blank{
+    background-color: rgb(192, 178, 178);
+    color: black;
+}
+.insider h2{
+    margin: 0px 25px;
+    padding: 5% 7%;
+    text-align: left;
+    font-size: 21px;
+    color: white;
+}
+
+.insider h1{
+    color: white;
+}
+
+.insider .green-circle{
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0px 15px;
+    background-color: rgb(51, 255, 0);
+    box-shadow: 0px 0px 4px rgb(182, 248, 1);
+}
+.box-container button{
+    padding: 10px 20px;
+    color: midnightblue;
+    background-color: white;
+    border: 1px solid #929292;
+    outline: none;
+    border-radius: 7px;
+    font-size: 18px;
+    margin-top: 13px;
+    cursor: pointer;
+}
+
+.delete-btn{
+    background-color: rgb(255, 55, 88) !important;
+    color: white !important;
+    font-weight: bold;
+    padding: 10px !important;
+}
+
+.add-btn{
+    background-color: rgb(255, 255, 255) !important;
+    color: midnightblue !important;
+    font-weight: bold;
+    padding: 10px  25px !important;
+}
+
+.ring-container {
+    position: relative;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    background-color: rgb(51, 255, 0);
+    border-radius: 50%;
+    position: absolute;
+    top: 23px;
+    left: 23px;
+}
+
+.ringring {
+    border: 3px solid rgb(51, 255, 0);
+    -webkit-border-radius: 30px;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    -webkit-animation: pulsate 1s ease-out;
+    -webkit-animation-iteration-count: infinite; 
+    opacity: 0.0;
+}
+.red-circle{
+    background-color: rgb(255, 72, 72) !important;
+}
+.red-ringring{
+    -webkit-animation: none !important;
+}
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+}
+.completion{
+    font-size: 20px;
+    color: white;
+}

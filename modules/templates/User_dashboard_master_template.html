@@ -1,0 +1,59 @@
+{% load static %}
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'styles/dashboard_template_styles.css' %}">
+</head>
+<body>
+    <div class="dashboard-panel-container">
+        <div class="hero-text-img">
+            <img class="inline" width="60" height="60" src="{% static 'images/logo.png' %}"/>
+            <h2 class="inline" style="text-align: center;">Village HelpDesk</h2>
+        </div>
+        <hr style="height: 2px;border: 0px solid transparent;background-image: linear-gradient(to right, rgba(52, 71, 103, 0), rgba(52, 71, 103, 0.4), rgba(52, 71, 103, 0)) !important;"/>
+        <ul class="navigation-panel">
+            <li class="dashboard">
+                <i class="fa fa-television"></i>
+                <a href="/userdashboard"> Dashboard</a>
+            </li>
+            <li class="newrequest">
+                <i class="fa fa-file-text"></i>
+                <a href="/newdocumentrequest">New Document Request</a>
+            </li>
+            <li class="records">
+                <i class="fa fa-history"></i>
+                <a href="/documentrecords">Document Records</a>
+            </li>
+            <li class="payments">
+                <i class="fa fa-credit-card"></i>
+                <a href="/taxpayment">Tax Payments</a>
+            </li>
+            <li class="vote">
+                <i class="fa fa-bullhorn"></i>
+                <a href="/voting">Vote Projects</a>
+            </li>
+            <li class="complaint">
+                <i class="fa fa-ticket"></i>
+                <a href="/raisecomplaint">Raise Complaint</a>
+            </li>
+            <h3 style="margin: 5px 0px 5px 20px;color: #a9a9a9;font-weight: bold;">ACCOUNT PAGES</h3>
+            <li class="profile">
+                <i class="fa fa-user-md"></i>
+                <a href="/userprofile">Profile</a>
+            </li>
+            <li class="logout">
+                <i class="fa fa-sign-out"></i>
+                <a href="/logout">Logout</a>
+            </li>
+        </ul>
+        <div class="img-container">
+            <img src="{% static 'images/dashboardbottom.svg' %}" width="80" class="dashboard-bottom-image"/>
+            Need Help?<br>Please Refer HelpDesk
+        </div>
+    </div>
+
+    <div class="main-content-dashboard">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>

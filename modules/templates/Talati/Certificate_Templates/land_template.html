@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta charset="utf-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <title>PDF Data</title>
+        <style>
+            @font-face {
+                font-family: "Noto Sans Gujarati";
+                src: url('{{ fontlink }}');
+            }
+            *,html,body{
+                font-family: 'Noto Sans Gujarati';
+            }
+            body{
+                border: 3px solid black;
+            }
+            table,tr,td{
+                font-size: 18px;
+            }
+            img{
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <b><h1 style="text-align: center; margin-top: 100px;text-shadow: 1px 0 0 black;">જમીનની માલિકીનું પ્રમાણપત્ર</h1></b>
+        <b><h2 style="text-align: center; margin-top: 4px;text-shadow: 1px 0 0 black;">ભારત સરકાર</h2></b>
+        <b><h2 style="text-align: center; margin-top: 4px;text-shadow: 1px 0 0 black;">મહેસૂલ અધિકારીની કચેરી</h2></b>
+        <table style="margin: 50px 0px 0px 60px;">
+            <tr>
+                <td>મંડળ:</td><td style="width: 190px; border-bottom: 1px solid black;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.village }}</td>
+            </tr>
+        </table>
+        <table style="margin: 20px 0px 0px 60px;">
+            <tr>
+                <td>જિલ્લો:</td><td style="width: 180px; border-bottom: 1px solid black;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.district }}</td>
+            </tr>
+        </table>
+
+        
+        <table style="margin: 50px 0px 0px 60px;">
+            <tr>
+                <td>આ પ્રમાણિત કરવા માટે છે કે શ્રી/શ્રીમતી/કુ</td><td style="width: 300px; border-bottom: 1px solid black;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.fullname }}</td>
+            </tr>
+        </table>
+
+
+        <table style="margin: 20px 0px 0px 60px;">
+            <tr>
+                <td>S/o, D/o, W/o.</td><td style="width: 180px; border-bottom: 1px solid black;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.parent_name }}</td>
+                <td>વય</td>
+                <td style="width: 145px; border-bottom: 1px solid black;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.age }}</td>
+            </tr>
+        </table>
+
+
+        <table style="margin: 20px 0px 0px 60px;">
+            <tr>
+                <td>વર્ષથી જમીન/ઘરનો માલિક છે.</td>
+            </tr>
+        </table>
+
+        <table style="margin: 20px 0px 0px 60px;">
+            <tr>
+                <td>S. નંબર</td>
+                <td style="width: 90px; border-bottom: 1px solid black;text-align: center;text-shadow: 1px 0 0 black;padding: 0px 10px;">{{ rdata.inward_id }}</td>
+                <td>હદ</td>
+                <td style="width: 90px; border-bottom: 1px solid black;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.acres }}</td>
+                <td>એકર ગામ</td>
+                <td style="width: 90px; border-bottom: 1px solid black;text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.village }}</td>
+                <td>માં સ્થિત છે.</td>
+            </tr>
+        </table>
+
+        <table style="margin: 50px 0px 0px 60px;">
+            <tr>
+                <td>તે/તેણી ઉપરોક્ત જમીનના એકમાત્ર માલિક છે અને તે તેના/તેણીના કબજામાં છે અને ભોગવે છે. તેની માલિકી અંગે કોઈ વિવાદ નથી.</td>
+            </tr>
+        </table>
+        <table style="margin: 4px 0px 0px 60px;">
+            <tr>
+                <td> આ જમીન સરકારી જમીન નથી કે સરકારની સોંપાયેલ જમીન નથી.</td>
+            </tr>
+        </table>
+        <table style="margin: 4px 0px 0px 60px;">
+            <tr>
+                <td>આ વધુ પ્રમાણિત કરવા માટે છે કે ઉપરોક્ત જમીન અને તેના માલિક</td>
+            </tr>
+        </table>
+        <table style="margin: 4px 0px 0px 60px;">
+            <tr>
+                <td>શ્રી/શ્રીમતી/કુ</td>
+                <td style="width: 100px; border-bottom: 1px solid black; text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.fullname }}</td>
+                <td>J&K ટેનન્સી એક્ટ, J&K જમીન ટોચમર્યાદા અધિનિયમ, ઇનામ નાબૂદી અધિનિયમ દ્વારા અસરગ્રસ્ત</td>
+            </tr>
+        </table>
+        <table style="margin: 4px 0px 0px 60px;">
+            <tr>
+                <td>નથી અને જમીન ઉપરોક્ત અધિનિયમો હેઠળ કોઈપણ કાર્યવાહીથી મુક્ત છે.</td>
+            </tr>
+        </table>
+        
+        <table style="margin: 50px 0px 0px 60px;">
+            <tr>
+                <td>તારીખ:</td><td style="width: 130px; border-bottom: 1px solid black; text-align: center;text-shadow: 1px 0 0 black;">{{ rdata.approval_date|date:'d/m/Y' }}</td>
+            </tr>
+        </table>
+        
+        <table style="margin: 50px 0px 0px 60px;">
+            <tr>
+                <td>સ્ટેશન સીલ:</td><td style="width: 150px; border-bottom: 1px solid black; text-align: center;"></td>
+            </tr>
+        </table>
+
+        <table style="margin: 130px 0px 0px 60px; padding-bottom: 230px;">
+            <tr>
+                <td>તલાટીની સહિ:</td><td style="width: 100px; border-bottom: 1px solid black; text-align: center;"></td>
+            </tr>
+        </table>
+
+    </body>
+    </html>

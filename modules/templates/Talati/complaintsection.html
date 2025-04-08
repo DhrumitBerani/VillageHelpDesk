@@ -1,0 +1,52 @@
+{% extends "Talati_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Document Requests
+{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'styles/managenews.css' %}">
+    <script>
+        document.getElementsByClassName("complaint")[0].classList.add("active");
+      </script>
+            <div class="sub_container">
+                <div class="title_div">
+                    <h1>Manage Complaint Section</h1><br>
+                    <h3 style="margin-top: 0%;">Handle User Complaints on the go</h3>
+                </div>
+                    {% if messages %}
+                       {% for message in messages %}
+                        <center>
+                            <div class="{{ message.tags }}" id="message" onclick="this.hidden=true">{{ message }}<span class="close">❌</span></div>
+                        </center>
+                            <script>
+                                setTimeout(()=>{
+                                    document.getElementById("message").style.display = "none";
+                                },5000);
+                            </script>
+                       {% endfor %}
+                    {% endif %}
+                <div class="container">
+                    <header>
+                        <h1>Pending Complaints</h1>
+                        <span>
+                        </span>
+                    </header>
+                    <div class="news-container">
+                        {% for complaint in complaints %}
+                        <div class="news-article">
+                            <h2>{{ complaint.title}}</h2>
+                            <p>{{complaint.description}}</p>
+                            <time>Date: {{complaint.complaint_date_time|date:"d/m/Y"}}</time><br>
+                            <button style="display:inline-block;width: 40%;background-color: rgb(1, 1, 206);color:white;padding: 10px 20px;font-size: 18px;border: 1px solid transparent;margin-top: 20px;cursor: pointer;" onclick="window.location.href='/replycomplaint?complaintid={{complaint.complaint_id}}';"><i class="fa fa-reply" style="margin-right: 10px;"> </i>  Reply</button>
+                            <button style="display:inline-block;width: 40%;background-color: rgb(246, 2, 116);color:white;padding: 10px 20px;font-size: 18px;border: 1px solid transparent;margin-top: 20px;cursor: pointer;" onclick="window.location.href='/complaint_id?complaint_id={{complaint.complaint_id}}';"><i class="fa fa-close" style="margin-right: 10px;"> </i>  Reject</button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+{% endblock %}

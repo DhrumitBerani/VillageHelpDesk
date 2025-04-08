@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>PDF Data</title>
+    <style>
+        @font-face {
+            font-family: "Noto Sans Gujarati";
+            src: url('{{ fontlink }}');
+        }
+        *,html,body{
+            font-family: 'Noto Sans Gujarati';
+        }
+        body{
+            border: 3px solid black;
+        }
+        table,tr,td{
+            font-size: 18px;
+        }
+        img{
+            margin: 0;
+            padding: 0;
+        }
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-right: 70px;
+            margin-top: 10px;
+        }
+        #barcode {
+            /* display: flex;
+            align-items: flex-start;
+            justify-content: center; */
+            padding-top: 150px;
+            padding-left: 360px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <img id="nationalsymbol" src="{{ imglink }}" alt="nationalsymbol" style="width:70px;height:100px;position: absolute; object-fit: fill;">
+    </div>
+    <div class="line-1" style="text-align: center; margin-top: 110px; color: black;">
+        <p style="margin-top: 10px; margin-bottom: 5px;">ગુજરાત સરકાર</p>
+        <p style="margin: 0px 0px 2px 0px;">Government of Gujarat</p>
+        <p style="margin: 0px 0px 2px 0px;">આરોગ્ય અને પરિવાર કલ્યાણ વિભાગ</p>
+        <p style="margin: 0px 0px 0px 0px;">Department of Health and Family Welfare</p>
+        <p style="margin: 5px 0px 0px 0px; font-size: 30px;"> મરણ પ્રમાણપત્ર</p>
+        <p style="margin: 5px 0px 5px 0px; font-size: 30px;">Death Certificate</p>
+        <p style="margin: 0px 0px 2px 0px;">(જન્મ અને મરણ નોંધણી અધિનિયમ ૧૯૬૯ ની કલમ ૧૨/૧૭</p>
+        <p style="margin: 0px 0px 2px 0px;">અને ગુજરાત જન્મ-મરણ નોંધણી નિયમો, ૨૦૧૮ના નિયમ - ૮ મુજબ)</p>
+        <p style="margin: 0px 0px 2px 0px;">(Issued under Section 1217 of the Registration of Birth and Death Act.1969 </p>
+        <p style="margin: 0px 0px 2px 0px;">and Rule 3 of the Gujarat Registration of Birth and Deaths Rules 2018)</p>
+    </div>
+    <table style="margin: 4px 40px 0px 60px;"><pre style="display: inline;margin-left: 240px;"></pre>
+        <tr>
+            <td>આથી પ્રમાણીત કરવામાં આવે છે કે, નીચેની માહિતી મરણના મૂળ રેકર્ડમાંથી લેવામાં આવી છે. જે ભારતના ગુજરાત રાજ્યના {{ rdata.district }}</td>
+        </tr>
+        <tr>
+            <td> જિલ્લા ના {{ rdata.taluka }} તાલુકાના {{ rdata.village }} ગ્રામ/શહેરના રજિસ્ટરમાં છે.</td>
+        </tr>
+    </table>
+    <table style="margin: 40px 40px 0px 60px;">
+        <tr>
+            <td style="width:80%;">નામ:  &emsp;{{ rdata.fullname }}</td>
+            <td>જાતિ:  &emsp;{% if rdata.gender == 'Male' %}પુરુષ{% else %}સ્ત્રી{%endif%}</td>
+        </tr>
+        </table>
+        <table style="margin: 20px 40px 0px 60px;">
+        <tr>
+            <td style="width: 68.8%;">મરણ તારીખ:  &emsp;{{ rdata.deathdate|date:'d/m/Y' }}</td>
+            <td>મરણ સ્થળ:  &emsp;{{ rdata.place_of_death }}</td>
+        </tr>
+    </table>
+        <!--  -->
+        <table style="margin: 20px 40px 0px 60px;">
+        <tr>
+            <td style="width: 65.4%;">માતાનું નામ:  &emsp;{{ rdata.mother_name }}</td>
+            <td>પિતા/પતિનું નામ:  &emsp;{{ rdata.father_name }}</td>
+        </tr>
+    </table>
+    <table style="margin: 20px 40px 0px 60px;">
+        <tr>
+            <td style="width: 60.4%;">મરનારના મૃત્યુ સમયનું સરનામું:  &emsp;{{ rdata.place_of_death }}</td>
+            <td>મરનારનું કાયમી સરનામું:  &emsp;{{ rdata.village }}</td>
+        </tr>
+    </table>
+    <table style="margin: 20px 40px 0px 60px;">
+        <tr>
+            <td style="width: 63.8%;">નોંધણી ક્રમાંક:  &emsp;{{ rdata.form_id }}/{{ rdata.approval_date|date:'Y'}}</td>
+            <td>નોંધણી ની તારીખ:  &emsp;{{ rdata.registrationdate|date:'d/m/Y'}}</td>
+        </tr>
+    </table>
+    <table style="margin: 25px 40px 0px 60px;">
+        <tr>
+            <td style="width: 34.4%;">પ્રમાણપત્ર કાઢી આપ્યાની તારીખ:  &emsp;{{ rdata.approval_date|date:'d/m/Y'}}</td>
+            <td style="padding-left: 120px;">પ્રમાણપત્ર આપનાર સત્તાધિકારીની સહી:  &emsp;</td>
+        </tr>
+    </table>
+    <table style="margin: 220px 40px 0px 170px;">
+        <tr>
+            <td>કચેરી ની મહોર</td>
+        </tr>
+    </table>
+    <div class="barcode" style=" height: 280px;">
+        
+        <!-- Hello -->
+        <img id="barcode" src="{{ barcodelink }}" alt="barcode" style="width: 240px;height: 40px;object-fit:cover;"/>
+        <table style="margin: 10px 40px 0px 60px;">
+            <tr style="text-align: center;">
+                <td>This is a computer generated extract of birth register. In case of any objection, please contact concerned Registrar (B&D). </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

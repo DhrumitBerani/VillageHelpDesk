@@ -1,0 +1,310 @@
+{% extends "User_dashboard_master_template.html" %} {% load static %} 
+{% block title %} Cast Certificate {% endblock %} {% block content %}
+<link rel="stylesheet" href="{% static 'styles/income_certificate.css' %}"/> 
+<script src="{% static 'js/jquery-3.6.3.js' %}"></script>
+
+<script>
+      document.getElementsByClassName("newrequest")[0].classList.add("active");
+</script>
+<div class="main_container">
+  <div class="head_container">
+    <h1>Cast Certificate Request</h1>
+    <h3>Please Fill the Details</h3>
+    <div class="circle2"></div>
+    <div class="circle1"></div> 
+  </div>
+  <form action="/submitapplication" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="sub_container">
+
+    <input type="hidden" name="form_type" value="cast_certificate_form">
+
+    <div class="box" id="box-1">
+      <label for="name" id="name_lable">Name</label>
+      <input type="text" id="name_input" name="fullname" placeholder="Name of Applicant"/>
+    </div>
+
+    <div class="box" id="box-2">
+      <label for="name" id="name_lable">Gender</label>
+                            
+      <div class="gender_input_div">
+
+      <input type="radio" name="gender" value="Male" id="gender1" style="margin-right: 2%;"/>
+      <label for="male">Male</label>
+
+      <input type="radio" name="gender" Value="Female" id="gender2" style="margin: 0% 1% 0% 3%;"/>
+      <label for="female">Female</label> 
+      </div>
+    </div>
+
+    <div class="box" id="box-3">
+      <label for="name" id="name_lable">Father/Mother Name</label>
+      <input type="text" id="name_input" name="father_mother_name" placeholder="Name of Father or Mother"/>
+    </div>
+
+    
+    <div class="box" id="box-5">
+      <label for="name" id="name_lable">Religion</label>
+      <input type="text" id="name_input" name="religion" placeholder="Name of Religion"/>
+    </div>
+    
+    <div class="box" id="box-6">
+      <label for="name" id="name_lable">Cast</label>
+      <input type="text" id="name_input" name="cast" placeholder="Cast Name"/>
+    </div>
+    
+    <div class="box" id="box-4">
+      <label for="name" id="name_lable">Sub Cast</label>
+      <input type="text" id="name_input" name="sub_cast" placeholder="Sub-Cast Name"/>
+    </div>
+    
+    <div class="box" id="box-4">
+      <label for="name" id="name_lable">District</label>
+      <select class="form-control" id="inputDistrict"" name="district">
+        <option value="Ahmedabad">Ahmedabad</option>
+        <option value="Amreli">Amreli</option>
+        <option value="Anand">Anand</option>
+        <option value="Aravalli">Aravalli</option>
+        <option value="Banaskantha">Banaskantha</option>
+        <option value="Bharuch">Bharuch</option>
+        <option value="Bhavnagar">Bhavnagar</option>
+        <option value="Botad">Botad</option>
+        <option value="ChhotaUdaipur">Chhota Udaipur</option>
+        <option value="Dahod">Dahod</option>
+        <option value="Dang">Dang</option>
+        <option value="DevbhoomiDwarka">Devbhoomi Dwarka</option>
+        <option value="Gandhinagar">Gandhinagar</option>
+        <option value="GirSomnath">Gir Somnath</option>
+        <option value="Jamnagar">Jamnagar</option>
+        <option value="Junagadh">Junagadh</option>
+        <option value="Kheda">Kheda</option>
+        <option value="Kutch">Kutch</option>
+        <option value="Mahisagar">Mahisagar</option>
+        <option value="Mehsana">Mehsana</option>
+        <option value="Morbi">Morbi</option>
+        <option value="Narmada">Narmada</option>
+        <option value="Navsari">Navsari</option>
+        <option value="Panchmahal">Panchmahal</option>
+        <option value="Patan">Patan</option>
+        <option value="Porbandar">Porbandar</option>
+        <option value="Rajkot">Rajkot</option>
+        <option value="Sabarkantha">Sabarkantha</option>
+        <option value="Surat">Surat</option>
+        <option value="Surendranagar">Surendranagar</option>
+        <option value="Tapi">Tapi</option>
+        <option value="Vadodara">Vadodara</option>
+        <option value="Valsad">Valsad</option>
+      </select>
+    </div>
+    
+    <div class="box" id="box-4">
+      <label for="name" id="name_lable">Taluka</label>
+      <select class="form-control" id="inputTaluka" name="taluka">
+        <option value="Asarwa">Asarwa</option>
+        <option value="Daskroi">Daskroi</option>
+        <option value="Detroj">Detroj</option>
+        <option value="Bavla">Bavla</option>
+        <option value="Dhandhuka">Dhandhuka</option>
+      </select>
+    </div>
+    
+    <div class="box" id="box-4">
+      <label for="name" id="name_lable">Village</label>
+      <select class="form-control" id="inputVillage" name="village">
+        {{ villagelist1|safe }}
+      </select>
+    </div>
+
+    <div class="box" id="box-7">
+      <label for="name" id="name_lable">Applicant Photo</label>
+      <input type="file" id="name_input" name="photo"/>
+    </div>
+
+    <div class="box" id="box-7">
+      <label for="name" id="name_lable">School Leaving Certificate</label>
+      <input type="file" id="name_input" name="Own_LC"/>
+    </div>
+
+    <div class="box" id="box-8">
+      <label for="name" id="name_lable">Family member school leaving certificate</label>
+      <input type="file" id="name_input" name="Family_LC"/>
+    </div>
+
+    <div class="box" id="box-9">
+      <label for="name" id="name_lable">Electricity Bill</label>
+      <input type="file" id="name_input" name="Electricity_bill"/>
+    </div>
+
+    <div class="birth_box submit-area" id="birth_box-15">
+      <input type="submit" value="Submit">
+    </div>
+    <br>
+    
+  </form>
+  </div>
+</div> 
+<script>
+ var Ahmedabad = ["bavla", "Daskroi", "Dholka", "Mandal", "Viramgam"];
+ var Amreli = ["Amreli", "Babra", "Kunkavav", "Lathi", "Savarkundla"];
+ var Anand = ["Anand", "Borsad", "Khambhat", "Petlad", "Sojitra"];
+ var Aravalli = ["Bayad","Bhiloda","Dhansura","Malpur","Meghraj"];
+ var Banaskantha = ["Bhabhar", "Deesa", "Dhanera", "Kankrej", "Tharad"];
+ var Bharuch = ["Amod", "Ankleshwar", "Bharuch", "Jambusar", "Vagra"];
+ var Bhavnagar = ["Botad", "Gadhada", "Gariadhar", "Mahuva", "Sihor"];
+ var Botad = ["Barwala","Botad","Gadhada","Ranpur","Other"];
+ var ChhotaUdaipur = ["Bodeli","Chhota Udaipur","Jetpur Pavi","Kavant","Nasvadi"];
+ var Dahod = ["Dahod", "Dhanpur", "Fatepura", "Garbada", "Jhalod"];
+ var Dang = ["Devgadbaria","Dhanpur","Dohad","Fatepura","Garbada"];
+ var DevbhoomiDwarka = ["Bhanvad","Kalyanpur","Khambhalia","Okhamandal","Other"];
+ var Gandhinagar = ["Dehgam", "Gandhinagar", "Kalol", "Mansa", "Uvarsad"];
+ var GirSomnath = ["Gir Gadhada", "Junagadh", "Keshod", "Mangrol", "Mendarda"];
+ var Jamnagar = ["Dhrol", "Jodiya", "Kalavad", "Lalpur", "Jamnagar"];
+ var Junagadh = ["Junagadh", "Keshod", "Mangrol", "Mendarda", "Una"];
+ var Kheda = ["Borsad", "Kapadwanj", "Kheda", "Matar", "Nadiad"];
+ var Kutch = ["Anjar", "Bhachau", "Bhuj", "Mandvi", "Nakhatrana"];
+ var Mahisagar = ["Balasinor","Kadana","Khanpur","Lunawada","Santrampur"];
+ var Mehsana = ["Kadi", "Mehsana", "Satlasana", "Unjha", "Vijapur"];
+ var Morbi = ["Halvad", "Maliya", "Morbi", "Tankara", "Wankaner"];
+ var Narmada = ["Dediapada", "Nandod", "Rajpipla", "Tilakwada", "Garudeshwar"];
+ var Navsari = ["Chikhli", "Gandevi", "Jalalpore", "Navsari", "Valsad"];
+ var Panchmahal = ["Ghoghamba","Godhra","Halol","Jambughoda","kalol"];
+ var Patan = ["Chanasma", "Patan", "Radhanpur", "Santalpur", "Sidhpur"];
+ var Porbandar = ["Kutiyana", "Manavadar", "Porbandar", "Ranavav", "Shirpur"];
+ var Rajkot  = ["Dhoraji", "Gondal", "Maliya", "Tankara", "Wankaner"];
+ var Sabarkantha = ["Himatnagar", "Idar", "Khedbrahma", "Modasa", "Prantij"];
+ var Surat = ["Bardoli", "Chorasi", "Kamrej", "Mahuva", "Mangrol"];
+ var Surendranagar = ["Chotila", "Dhrangadhra", "Limbdi", "Sayla", "Surendranagar"];
+ var Tapi = ["Dolvan","Kukarmunda","Nizar","Songadh","Uchchhal"];
+ var Vadodara = ["Padra", "Sankheda", "Savli", "Vaghodia", "Waghodia"];
+ var Valsad = ["Dharampur", "Kaprada", "Pardi", "Umbergaon", "Valsad"];
+
+$("#inputTaluka").change(function(){
+  var TalukaSelected = $(this).prop('selectedIndex');
+  if(TalukaSelected==1){
+    $("#inputVillage").html('{{ villagelist1|safe }}');
+  }else if(TalukaSelected==2){
+    $("#inputVillage").html('{{ villagelist2|safe }}');
+  }else if(TalukaSelected==3){
+    $("#inputVillage").html('{{ villagelist3|safe }}');
+  }else if(TalukaSelected==4){
+    $("#inputVillage").html('{{ villagelist4|safe }}');
+  }else if(TalukaSelected==5){
+    $("#inputVillage").html('{{ villagelist5|safe }}');
+  }
+});
+
+$("#inputDistrict").change(function(){
+  var DistrictSelected = $(this).val();
+  var optionsList;
+  var htmlString = "";
+
+  switch (DistrictSelected) {
+    case "Ahmedabad":
+        optionsList = Ahmedabad;
+        break;
+    case "Amreli":
+        optionsList = Amreli;
+        break;
+    case "Anand":
+        optionsList = Anand;
+        break;
+    case "Aravalli":
+        optionsList = Aravalli;
+        break;
+    case "Banaskantha":
+        optionsList = Banaskantha;
+        break;
+    case "Bharuch":
+        optionsList = Bharuch;
+        break;
+    case  "Bhavnagar":
+        optionsList = Bhavnagar;
+        break;
+    case "Botad":
+        optionsList = Botad;
+        break;
+    case "ChhotaUdaipur":
+        optionsList = ChhotaUdaipur;
+        break;
+    case "Dahod":
+        optionsList = Dahod;
+        break;
+    case "Dang":
+        optionsList = Dang;
+        break;
+    case  "DevbhoomiDwarka":
+        optionsList = DevbhoomiDwarka;
+        break;
+    case "Gandhinagar":
+        optionsList = Gandhinagar;
+        break;
+    case  "GirSomnath":
+        optionsList = GirSomnath;
+        break;
+    case "Jamnagar":
+        optionsList = Jamnagar;
+        break;
+    case  "Junagadh":
+        optionsList = Junagadh;
+        break;
+    case "Kheda":
+        optionsList = Kheda ;
+        break;
+    case  "Kutch":
+        optionsList = Kutch;
+        break;
+    case "Mahisagar":
+        optionsList = Mahisagar;
+        break;
+    case  "Mehsana":
+        optionsList = Mehsana;
+        break;
+    case "Morbi":
+        optionsList = Morbi;
+        break;
+    case  "Narmada":
+        optionsList = Narmada;
+        break;
+    case "Navsari":
+        optionsList = Navsari;
+        break;
+    case  "Panchmahal":
+        optionsList = Panchmahal;
+        break;
+    case  "Patan":
+        optionsList = Patan;
+        break;
+    case "Porbandar":
+        optionsList = Porbandar ;
+        break;
+    case  "Rajkot":
+        optionsList = Rajkot;
+        break;
+    case  "Sabarkantha":
+        optionsList = Sabarkantha;
+        break;
+    case "Surat":
+        optionsList = Surat;
+        break;
+    case  "Surendranagar":
+        optionsList = Surendranagar;
+        break;
+    case "Tapi":
+        optionsList = Tapi;
+        break;
+    case  "Vadodara":
+        optionsList = Vadodara;
+        break;
+    case "Valsad":
+        optionsList = Valsad;
+        break;
+}
+
+  for(var i = 0; i < optionsList.length; i++){
+    htmlString = htmlString+"<option value='"+ optionsList[i] +"'>"+ optionsList[i] +"</option>";
+  }
+  $("#inputTaluka").html(htmlString);
+
+});
+</script>
+{% endblock %}

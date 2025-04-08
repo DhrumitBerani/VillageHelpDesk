@@ -1,0 +1,182 @@
+{% extends "User_dashboard_master_template.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  Complaint
+{% endblock %}
+
+{% block content %}
+
+        <style>
+            body {
+                background-color: #f6f6f6;
+            }
+            .main-container {
+                font-family: 'Muli';
+                height: fit-content;
+                border-radius: 17px;
+                box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
+                padding-bottom: 10px;
+            }
+            .background-cover{
+                background-image: url('{% static '/images/Opinion.jpeg' %}');
+                background-size: cover;
+                background-position: center;
+                filter: blur(0px) brightness(85%);
+                margin: 0px;
+                height: 100vh;
+                z-index: -1;
+                padding-top: 2%;
+                display: flex;  
+            }
+            .background-cover2{
+                background-image: url('{% static 'images/complaint.png' %}');
+                background-repeat: no-repeat;
+                /* background-attachment: fixed; */
+                background-position: left top; 
+                background-size: cover;
+                /* background-color: rgba(255,255,255,1); */
+                position: relative;
+                margin: 0px;
+                height: 200px;
+                z-index: -1;
+                padding-top: 2%;
+                border-radius: 17px 17px 0px 0px;
+                overflow: hidden;
+                /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+            }
+            .circle1{
+                position: absolute;
+                right: -5%;
+                top: -10%;
+                width: 230px;
+                height: 230px;
+                /* filter: blur(10px); */
+                background-color: rgba(74, 3, 255, 0.2);
+                border-bottom-left-radius:  100%;
+                /* border-top-left-radius:  100%; */
+                overflow: hidden;
+                z-index: -1;
+            }
+            .circle2{
+                position: absolute;
+                right: -5%;
+                top: 12%;
+                width: 230px;
+                height: 230px;
+                /* filter: blur(60px); */
+                background-color: rgba(74, 3, 255, 0.2);
+                border-top-left-radius:  100%;
+                overflow: hidden;
+            }
+            .container{
+                padding: 50px;
+            }
+            .form-head{
+                display: inline-block;
+                font-size: 2.7vh;
+                width: 17%;
+                padding: 10px 4px;
+                font-family: sans-serif;
+                color: midnightblue;
+                border-left: 5px solid midnightblue;
+                margin-top: 1.5%;
+                background-color: rgba(0, 0, 0, 0.04);
+            }
+            .complaint-data{
+                font-size: 2.6vh;
+                padding: 10px 20px;
+            }
+            .view-btn{
+                text-decoration: none;
+                padding: 10px 12px;
+                color: white;
+                background-color: midnightblue;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+                font-weight: bold;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+            }
+            .responsive-container{
+                display: flex;
+            }
+            .responsive-container > *{
+                flex: 0 0 auto;
+            }
+            .responsive .form-head{
+                width: 150px;
+            }
+            .responsive-container .complaint-data{
+                width: 80%;
+                margin-top: 12px;
+            }
+        </style>
+        <div class="main-container">
+            <div class="background-cover2" >
+                <div class="circle2"></div>
+                <div class="circle1"></div>
+                <h1 style="color: white;text-align: center;margin-top: 3.5%;margin-left:2%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Complaint Section </h1>
+            </div>
+            <div id="main">
+                
+                <div class="container">
+                    <h1 style="color: midnightblue;text-align: center;margin: 0% 0% 0% 1%;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;font-weight: bold;"> Complaint Information</h1>
+                    <span class="form-head"><b>Title</b></span>
+                    <span class="complaint-data">{{ complaint.title }}</span><br>
+                    
+                    <div class="responsive-container">
+                        <span class="form-head"><b>Description</b></span>
+                        <span class="complaint-data">{{ complaint.description }}</span><br>
+                    </div>
+
+                    <span class="form-head"><b>Complaint Time</b></span>
+                    <span class="complaint-data">{{ complaint.complaint_date_time }}</span><br>
+
+                    <span class="form-head"><b>Status</b></span>
+                    <span class="complaint-data">{{ complaint.status }}</span><br>
+                    
+                    {% if complaint.resolve_date_time %}
+                    
+                    <span class="form-head"><b>Resolution Time</b></span>
+                    <span class="complaint-data">{{ complaint.resolve_date_time }}</span><br>
+
+                    <div class="responsive-container">
+                        <span class="form-head"><b>Answer</b></span>
+                        <span class="complaint-data answer">{{ complaint.answer }}</span><br><br><br> 
+                    </div>
+                    {% endif %}
+                    
+                    <center><a href="/raisecomplaint" class="view-btn">Go Back</a></center>
+                </div>
+            </div>
+        </div>
+        <script src="{% static '/js/jquery-3.6.3.js' %}"></script>
+        <script>
+            document.getElementsByClassName("complaint")[0].classList.add("active");
+            
+            $(document).ready(function () {
+                $(".savebtn").click(function () {
+                    var formdata = new FormData();
+                    var title = $("#form-ttl").val();
+                    var description = $("#form-desc").val();
+                    formdata.append('querytitle', title);
+                    formdata.append('querydescription', description);
+                    $.ajax({
+                        type: 'POST',
+                        url: 'handleuserquery',
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success: function(json) {
+                            alert("Your Request has been submitted successfully");
+                            document.getElementById("complaint-form").reset();
+                            console.log("Response: " + json);
+                        }
+                    });
+                });
+            });
+        </script>
+{% endblock %}
